@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Tutor App</title>
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <script src="client.js"></script>
+</head>
+<body>
+<script src="/js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<div class="pos-f-t">
+    <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4">
+            <div class="row">
+                <div class="col-3">
+                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="grade79" data-toggle="pill" href="#v-pills-home" role="tab"
+                           aria-controls="v-pills-home" aria-selected="true">Grade 7-9</a>
+                        <a class="nav-link" id="grade1011" data-toggle="pill" href="#v-pills-profile" role="tab"
+                           aria-controls="v-pills-profile" aria-selected="false">Grade 10-11</a>
+                        <a class="nav-link" id="grade1213" data-toggle="pill" href="#v-pills-messages" role="tab"
+                           aria-controls="v-pills-messages" aria-selected="false">Grade 12-13</a>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                             aria-labelledby="v-pills-home-tab">...
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                             aria-labelledby="v-pills-profile-tab">...
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
+                             aria-labelledby="v-pills-messages-tab">...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-dark bg-dark">
+        <button class="navbar-toggler" id="userdrop" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+                aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <img src="images/user.png"></a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">My Account</a>
+                <a class="dropdown-item" href="#">Logout</a>
+            </div>
+        </li>
+    </nav>
+</div>
+<div id="home" style="display: none">
+    <div class="card mb-3 mx-auto w-75">
+        <img src="images/main.jpg" class="card-img-top" alt="..." style="height: 60vh">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    <div>
+        <div class="col-sm-12 text-center">
+            <a class="btn btn-primary btn-md center-block buttonHome">Login</a>
+            <a class="btn btn-danger btn-md center-block buttonHome">Sign Up</a>
+            <a class="btn btn-danger btn-md center-block buttonHome">Tutor Sign Up</a>
+        </div>
+    </div>
+</div>
+<div class="login" id="studentSignIn" style="display: none">
+    <h2 class="text-center">Sign In Student</h2>
+    <h5 class="text-center">Need an account?</h5>
+    <p class="text-center">a student?</p>
+    <p class="text-center">a tutor?</p>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username" required="required">
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" required="required">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary btn-block">Sign in</button>
+    </div>
+</div>
+<div class="login" id="tutorSignIn" style="display: none">
+    <h2 class="text-center">Sign In Tutor</h2>
+    <h5 class="text-center">Need an account?</h5>
+    <p class="text-center">a student?</p>
+    <p class="text-center">a tutor?</p>
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username" required="required">
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" required="required">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary btn-block">Sign in</button>
+    </div>
+</div>
+<div class="signup-form" id="studentSignUp" style="display: none">
+    <div>
+        <h2>Sign Up (Student)</h2>
+        <p class="text-center">Already have an account?</p>
+        <p class="text-center"><a href="#">Sign in Student</a></p>
+        <h3>A tutor? Sign Up</h3>
+        <p class="text-center"><a href="#">Tutor Sign Up</a></p>
+        <hr>
+        <div class="form-group">
+            <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" name="email" placeholder="Email Address" required="required">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
+        </div>
+    </div>
+</div>
+<div class="signup-form" id="tutorSignUp">
+    <div>
+        <h2>Sign Up (Tutor)</h2>
+        <p class="text-center">Already have an account?</p>
+        <p class="text-center"><a href="#">Sign in Tutor</a></p>
+        <h3>A student? Sign Up</h3>
+        <p class="text-center"><a href="#">Student Sign Up</a></p>
+        <hr>
+        <div class="form-group">
+            <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" name="email" placeholder="Email Address" required="required">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="qualification" placeholder="Qualification" required="required">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="address" placeholder="Address" required="required">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="address" placeholder="Address" required="required">
+        </div>
+        <div class="form-group">
+            <label>
+                <select class="custom-select">
+                    <option>Region</option>
+                    <option value="1">North</option>
+                    <option value="2">East</option>
+                    <option value="3">South</option>
+                    <option value="4">West</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <select class="custom-select">
+                    <option>Class</option>
+                    <option value="1">Grade 7-9</option>
+                    <option value="2">Grade 10-11</option>
+                    <option value="3">Grade 12-13</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="subjects" placeholder="Subjects" required="required">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="phone" placeholder="Phone Number" required="required">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
