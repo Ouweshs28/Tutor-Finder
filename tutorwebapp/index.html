@@ -23,6 +23,7 @@
                            aria-controls="v-pills-messages" aria-selected="false">Grade 12-13</a>
                     </div>
                 </div>
+
                 <div class="col-9">
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
@@ -44,7 +45,7 @@
                 aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown"style="display: none">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
                 <img src="images/user.png"></a>
@@ -106,10 +107,8 @@
 <div class="signup-form" id="studentSignUp" style="display: none">
     <div>
         <h2>Sign Up (Student)</h2>
-        <p class="text-center">Already have an account?</p>
-        <p class="text-center"><a href="#">Sign in Student</a></p>
-        <h3>A tutor? Sign Up</h3>
-        <p class="text-center"><a href="#">Tutor Sign Up</a></p>
+        <p class="text-center">Already have an account? <a href="#">Sign in Student</a></p>
+        <h4>A tutor? Sign Up  <a href="#">Tutor Sign Up</a></h4>
         <hr>
         <div class="form-group">
             <input type="text" class="form-control" name="username" placeholder="Username" required="required">
@@ -125,13 +124,11 @@
         </div>
     </div>
 </div>
-<div class="signup-form" id="tutorSignUp">
+<div class="signup-form" id="tutorSignUp" style="display: none">
     <div>
         <h2>Sign Up (Tutor)</h2>
-        <p class="text-center">Already have an account?</p>
-        <p class="text-center"><a href="#">Sign in Tutor</a></p>
-        <h3>A student? Sign Up</h3>
-        <p class="text-center"><a href="#">Student Sign Up</a></p>
+        <p class="text-center">Already have an account?  <a href="#">Sign in Tutor</a></p>
+        <h4>A student? Sign Up  <a href="#">Student Sign Up</a></h4>
         <hr>
         <div class="form-group">
             <input type="text" class="form-control" name="username" placeholder="Username" required="required">
@@ -152,9 +149,9 @@
             <input type="text" class="form-control" name="address" placeholder="Address" required="required">
         </div>
         <div class="form-group">
+            <p class="selectOption">Region :  </p>
             <label>
-                <select class="custom-select">
-                    <option>Region</option>
+                <select class="custom-select">Region
                     <option value="1">North</option>
                     <option value="2">East</option>
                     <option value="3">South</option>
@@ -163,9 +160,9 @@
             </label>
         </div>
         <div class="form-group">
+            <p class="selectOption">Class:  </p>
             <label>
                 <select class="custom-select">
-                    <option>Class</option>
                     <option value="1">Grade 7-9</option>
                     <option value="2">Grade 10-11</option>
                     <option value="3">Grade 12-13</option>
@@ -180,6 +177,48 @@
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
+        </div>
+    </div>
+</div>
+<div class="card mb-3 row justify-content-center cardTutor" style="display: none">
+    <div class="card-body">
+        <h5 class="card-title text-center">Tutor Name</h5>
+        <p class="card-text tutorText">Qualification: </p>
+        <p class="card-text tutorText">Experience :</p>
+        <p class="card-text tutorText">Region: </p>
+        <p class="card-text tutorText">Address:</p>
+        <p class="card-text tutorText">Phone Number:</p>
+        <p class="card-text tutorText">Email: </p>
+        <div class="tutorButton">
+        <a href="#" class="btn btn-primary">Add Reviews</a>
+        <a href="#" class="btn btn-primary">Reviews</a>
+        </div>
+    </div>
+</div>
+<div id="tutorReview" style="display: none">
+    <div class="card mb-3 row justify-content-center cardTutor">
+        <div class="card-body ">
+            <h5 class="card-title text-center">Tutor Name</h5>
+            <p class="card-text tutorText">Qualification: </p>
+            <p class="card-text tutorText">Experience :</p>
+            <p class="card-text tutorText">Region: </p>
+            <p class="card-text tutorText">Address:</p>
+            <p class="card-text tutorText">Phone Number:</p>
+            <p class="card-text tutorText">Email: </p>
+        </div>
+    </div>
+    <h2 class="text-center">Reviews</h2>
+    <div class="card-body justify-content-center cardTutor">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Username</h5>
+                <p class="card-text">Rating: </p>
+                <p class="card-text">Comments: </p>
+                <p class="card-text"><small class="text-muted">Last updated: date</small></p>
+            </div>
+        </div>
+        <div class="backButton">
+            <button class="btn btn-primary btn-lg btn-block">Back</button>
         </div>
     </div>
 </div>

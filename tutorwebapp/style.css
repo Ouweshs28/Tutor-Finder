@@ -72,3 +72,24 @@
 .signup-form .btn:hover, .signup-form .btn:focus {
     outline: none !important;
 }
+
+.selectOption{
+    float: left;
+    margin-right: 10px;
+}
+
+.cardTutor{
+    margin: 4% 15% 10% 15%!important;
+}
+
+.tutorText{
+    text-align: left;
+}
+
+.tutorButton{
+    text-align: right;
+}
+
+.backButton{
+    margin: 4% 15% 10% 15%!important;
+}
