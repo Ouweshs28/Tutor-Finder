@@ -1,7 +1,28 @@
+/*
+Navbar
+ */
+#navIcon{
+    margin-right: 80%;
+}
+
+.dropdown{
+    list-style: none;
+}
+.nav-link{
+    color: white!important;
+}
+
+/*
+Home Screen
+ */
 .buttonHome{
     width: 200px;
     margin-right: 15px;
 }
+
+/*
+Login
+ */
 .login {
     width: 340px;
     margin: 50px auto;
@@ -35,6 +56,9 @@
 .form-control, .btn {
     border-radius: 3px;
 }
+/*
+Sign Up
+ */
 .signup-form {
     width: 400px;
     margin: 0 auto;
@@ -72,6 +96,9 @@
 .signup-form .btn:hover, .signup-form .btn:focus {
     outline: none !important;
 }
+/*
+Custom stylings
+ */
 
 .selectOption{
     float: left;
@@ -93,3 +120,4 @@
 .backButton{
     margin: 4% 15% 10% 15%!important;
 }
+

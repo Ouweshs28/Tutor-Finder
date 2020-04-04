@@ -1,15 +1,119 @@
 //Points to a div element where user combo will be inserted.
 let userDiv;
 let addUserResultDiv;
+let homePage=document;
+let loginStudentPage;
+let loginTutorPage=document;
+let registerStudentPage;
+let registerTutorPage;
+let tutorReviewPage;
+let addReviewPage;
+let tutorPage;
 
 //Set up page when window has loaded
 window.onload = init;
 
 //Get pointers to parts of the DOM after the page has loaded.
 function init(){
-    userDiv = document.getElementById("UserDiv");
-    addUserResultDiv = document.getElementById("AddUserResult");
-    loadUsers();
+    homePage=document.getElementById("home");
+    loginStudentPage=document.getElementById("studentSignIn");
+    loginTutorPage=document.getElementById("tutorSignIn");
+    registerStudentPage=document.getElementById("studentSignUp");
+    registerTutorPage=document.getElementById("tutorSignUp");
+    tutorReviewPage=document.getElementById("tutorReview");
+    addReviewPage=document.getElementById("addReview");
+    tutorPage=document.getElementById("tutors");
+    loadHome()
+}
+
+function loadHome(){
+    homePage.style.display="block";
+    loginStudentPage.style.display="none";
+    loginTutorPage.style.display="none";
+    registerStudentPage.style.display="none";
+    registerTutorPage.style.display="none";
+    tutorReviewPage.style.display="none";
+    addReviewPage.style.display="none";
+    tutorPage.style.display="none";
+
+}
+
+function loadStudentLogin() {
+    homePage.style.display="none";
+    loginTutorPage.style.display="none";
+    loginStudentPage.style.display="block";
+    registerTutorPage.style.display="none";
+    registerStudentPage.style.display="none";
+    tutorReviewPage.style.display="none";
+    addReviewPage.style.display="none";
+    tutorPage.style.display="none";
+
+}
+
+function loadTutorLogin() {
+    homePage.style.display="none";
+    loginTutorPage.style.display="block";
+    loginStudentPage.style.display="none";
+    registerTutorPage.style.display="none";
+    registerStudentPage.style.display="none";
+    tutorReviewPage.style.display="none";
+    addReviewPage.style.display="none";
+    tutorPage.style.display="none";
+}
+
+function loadStudentReg() {
+    homePage.style.display="none";
+    loginTutorPage.style.display="none";
+    loginStudentPage.style.display="none";
+    registerTutorPage.style.display="none";
+    registerStudentPage.style.display="block";
+    tutorReviewPage.style.display="none";
+    addReviewPage.style.display="none";
+    tutorPage.style.display="none";
+}
+
+function loadTutorReg() {
+    homePage.style.display="none";
+    loginTutorPage.style.display="none";
+    loginStudentPage.style.display="none";
+    registerTutorPage.style.display="block";
+    registerStudentPage.style.display="none";
+    tutorReviewPage.style.display="none";
+    addReviewPage.style.display="none";
+    tutorPage.style.display="none";
+}
+
+function loadTutorReview() {
+    homePage.style.display="none";
+    loginTutorPage.style.display="none";
+    loginStudentPage.style.display="none";
+    registerTutorPage.style.display="none";
+    registerStudentPage.style.display="none";
+    tutorReviewPage.style.display="block";
+    addReviewPage.style.display="none";
+    tutorPage.style.display="none";
+}
+
+function loadAddTutorReview() {
+    homePage.style.display="none";
+    loginTutorPage.style.display="none";
+    loginStudentPage.style.display="none";
+    registerTutorPage.style.display="none";
+    registerStudentPage.style.display="none";
+    tutorReviewPage.style.display="none";
+    addReviewPage.style.display="block";
+    tutorPage.style.display="none";
+}
+
+function loadTutors() {
+    homePage.style.display="none";
+    loginTutorPage.style.display="none";
+    loginStudentPage.style.display="none";
+    registerTutorPage.style.display="none";
+    registerStudentPage.style.display="none";
+    tutorReviewPage.style.display="none";
+    addReviewPage.style.display="none";
+    tutorPage.style.display="block";
 }
 
 /* Loads current users and adds them to the page. */
@@ -77,4 +181,3 @@ function addUser() {
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send( JSON.stringify(usrObj) );
 }
- 

@@ -11,19 +11,19 @@
 <link rel="stylesheet" href="css/bootstrap.min.css"/>
 <div class="pos-f-t">
     <div class="collapse" id="navbarToggleExternalContent">
+
         <div class="bg-dark p-4">
             <div class="row">
                 <div class="col-3">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link active" id="grade79" data-toggle="pill" href="#v-pills-home" role="tab"
+                        <a class="nav-link active" id="grade79" data-toggle="pill" onclick="loadTutors()" role="tab"
                            aria-controls="v-pills-home" aria-selected="true">Grade 7-9</a>
-                        <a class="nav-link" id="grade1011" data-toggle="pill" href="#v-pills-profile" role="tab"
+                        <a class="nav-link" id="grade1011" data-toggle="pill" onclick="loadTutors()" role="tab"
                            aria-controls="v-pills-profile" aria-selected="false">Grade 10-11</a>
-                        <a class="nav-link" id="grade1213" data-toggle="pill" href="#v-pills-messages" role="tab"
+                        <a class="nav-link" id="grade1213" data-toggle="pill" onclick="loadTutors()" role="tab"
                            aria-controls="v-pills-messages" aria-selected="false">Grade 12-13</a>
                     </div>
                 </div>
-
                 <div class="col-9">
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
@@ -45,7 +45,12 @@
                 aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <li class="nav-item dropdown"style="display: none">
+        <li class="navbar-brand" id="navIcon">
+            <a class="navbar-brand" onclick="loadHome()">Home Page
+                <img src="images/logo.png" width="30" height="30" alt="">
+            </a>
+        </li>
+        <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
                 <img src="images/user.png"></a>
@@ -56,7 +61,7 @@
         </li>
     </nav>
 </div>
-<div id="home" style="display: none">
+<div id="home">
     <div class="card mb-3 mx-auto w-75">
         <img src="images/main.jpg" class="card-img-top" alt="..." style="height: 60vh">
         <div class="card-body">
@@ -68,17 +73,17 @@
     </div>
     <div>
         <div class="col-sm-12 text-center">
-            <a class="btn btn-primary btn-md center-block buttonHome">Login</a>
-            <a class="btn btn-danger btn-md center-block buttonHome">Sign Up</a>
-            <a class="btn btn-danger btn-md center-block buttonHome">Tutor Sign Up</a>
+            <a class="btn btn-primary btn-md center-block buttonHome" onclick="loadStudentLogin()">Login</a>
+            <a class="btn btn-danger btn-md center-block buttonHome" onclick="loadStudentReg()">Sign Up</a>
+            <a class="btn btn-danger btn-md center-block buttonHome" onclick="loadTutorReg()">Tutor Sign Up</a>
         </div>
     </div>
 </div>
-<div class="login" id="studentSignIn" style="display: none">
+<div class="login" id="studentSignIn">
     <h2 class="text-center">Sign In Student</h2>
-    <h5 class="text-center">Need an account?</h5>
-    <p class="text-center">a student?</p>
-    <p class="text-center">a tutor?</p>
+    <h5 class="text-center">Need an account click on the links below</h5>
+    <p class="text-center" onclick="loadStudentReg()">a student?</p>
+    <p class="text-center"onclick="loadTutorReg()">a tutor?</p>
     <div class="form-group">
         <input type="text" class="form-control" placeholder="Username" required="required">
     </div>
@@ -89,11 +94,11 @@
         <button class="btn btn-primary btn-block">Sign in</button>
     </div>
 </div>
-<div class="login" id="tutorSignIn" style="display: none">
+<div class="login" id="tutorSignIn">
     <h2 class="text-center">Sign In Tutor</h2>
-    <h5 class="text-center">Need an account?</h5>
-    <p class="text-center">a student?</p>
-    <p class="text-center">a tutor?</p>
+    <h5 class="text-center">Need an account click on the links below</h5>
+    <p class="text-center" onclick="loadStudentReg()">a student?</p>
+    <p class="text-center"onclick="loadTutorReg()">a tutor?</p>
     <div class="form-group">
         <input type="text" class="form-control" placeholder="Username" required="required">
     </div>
@@ -104,11 +109,11 @@
         <button class="btn btn-primary btn-block">Sign in</button>
     </div>
 </div>
-<div class="signup-form" id="studentSignUp" style="display: none">
+<div class="signup-form" id="studentSignUp">
     <div>
         <h2>Sign Up (Student)</h2>
-        <p class="text-center">Already have an account? <a href="#">Sign in Student</a></p>
-        <h4>A tutor? Sign Up  <a href="#">Tutor Sign Up</a></h4>
+        <p class="text-center">Already have an account? <a onclick="loadStudentLogin()">Sign in Student</a></p>
+        <h4>A tutor? Sign Up  <a onclick="loadTutorReg()">Tutor Sign Up</a></h4>
         <hr>
         <div class="form-group">
             <input type="text" class="form-control" name="username" placeholder="Username" required="required">
@@ -124,11 +129,11 @@
         </div>
     </div>
 </div>
-<div class="signup-form" id="tutorSignUp" style="display: none">
+<div class="signup-form" id="tutorSignUp">
     <div>
         <h2>Sign Up (Tutor)</h2>
-        <p class="text-center">Already have an account?  <a href="#">Sign in Tutor</a></p>
-        <h4>A student? Sign Up  <a href="#">Student Sign Up</a></h4>
+        <p class="text-center">Already have an account?  <a onclick="loadTutorLogin()">Sign in Tutor</a></p>
+        <h4>A student? Sign Up  <a onclick="loadStudentReg()">Student Sign Up</a></h4>
         <hr>
         <div class="form-group">
             <input type="text" class="form-control" name="username" placeholder="Username" required="required">
@@ -180,7 +185,8 @@
         </div>
     </div>
 </div>
-<div class="card mb-3 row justify-content-center cardTutor" style="display: none">
+<div id="tutors">
+<div class="card mb-3 row justify-content-center cardTutor">
     <div class="card-body">
         <h5 class="card-title text-center">Tutor Name</h5>
         <p class="card-text tutorText">Qualification: </p>
@@ -195,7 +201,8 @@
         </div>
     </div>
 </div>
-<div id="tutorReview" style="display: none">
+</div>
+<div id="tutorReview">
     <div class="card mb-3 row justify-content-center cardTutor">
         <div class="card-body ">
             <h5 class="card-title text-center">Tutor Name</h5>
@@ -218,8 +225,32 @@
             </div>
         </div>
         <div class="backButton">
-            <button class="btn btn-primary btn-lg btn-block">Back</button>
+            <button class="btn btn-primary btn-lg btn-block" onclick="loadTutors()">Back</button>
         </div>
+    </div>
+</div>
+<div class="login" id="addReview">
+    <h2 class="text-center">Tutor Name</h2>
+    <div class="form-group">
+        <p class="selectOption">Rating:  </p>
+        <label>
+            <select class="custom-select">
+                <option value="1">Not recommended</option>
+                <option value="2">Average</option>
+                <option value="3">Good</option>
+                <option value="4">Excellent</option>
+            </select>
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Comments</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary btn-block">Add Review</button>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-danger btn-block" onclick="loadTutors()">Cancel</button>
     </div>
 </div>
 </body>
