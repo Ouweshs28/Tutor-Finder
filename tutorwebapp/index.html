@@ -83,7 +83,7 @@
     <h2 class="text-center">Sign In Student</h2>
     <h5 class="text-center">Need an account click on the links below</h5>
     <p class="text-center" onclick="loadStudentReg()">a student?</p>
-    <p class="text-center"onclick="loadTutorReg()">a tutor?</p>
+    <p class="text-center" onclick="loadTutorReg()">a tutor?</p>
     <div class="form-group">
         <input type="text" class="form-control" placeholder="Username" required="required">
     </div>
@@ -125,7 +125,7 @@
             <input type="password" class="form-control" name="password" placeholder="Password" required="required">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>
+            <button onclick="registerStudent()" class="btn btn-primary btn-block btn-lg">Sign Up</button>
         </div>
     </div>
 </div>
@@ -161,16 +161,17 @@
                     <option value="2">East</option>
                     <option value="3">South</option>
                     <option value="4">West</option>
+                    <option value="5">Center</option>
                 </select>
             </label>
         </div>
         <div class="form-group">
-            <p class="selectOption">Class:  </p>
+            <p class="selectOption">Grade:  </p>
             <label>
                 <select class="custom-select">
-                    <option value="1">Grade 7-9</option>
-                    <option value="2">Grade 10-11</option>
-                    <option value="3">Grade 12-13</option>
+                    <option value="1">7-9</option>
+                    <option value="2">10-11</option>
+                    <option value="3">12-13</option>
                 </select>
             </label>
         </div>
@@ -196,8 +197,8 @@
         <p class="card-text tutorText">Phone Number:</p>
         <p class="card-text tutorText">Email: </p>
         <div class="tutorButton">
-        <a href="#" class="btn btn-primary">Add Reviews</a>
-        <a href="#" class="btn btn-primary">Reviews</a>
+        <a class="btn btn-primary" onclick="loadAddTutorReview()">Add Reviews</a>
+        <a class="btn btn-primary" onclick="loadTutorReview()">Reviews</a>
         </div>
     </div>
 </div>

@@ -148,36 +148,38 @@ function loadUsers() {
 
 
 /* Posts a new user to the server. */
-function addUser() {
+function registerStudent() {
     //Set up XMLHttpRequest
     let xhttp = new XMLHttpRequest();
 
     //Extract user data
-    let usrName = document.getElementById("NameInput").value;
-    let usrEmail = document.getElementById("EmailInput").value;
-    let usrAge = document.getElementById("AgeInput").value;
+    let usrName = document.getElementsByName("username")[0].value;
+    let usrEmail = document.getElementsByName("email")[0].value;
+    let usrPass = document.getElementsByName("password")[0].value;
 
     //Create object with user data
-    let usrObj = {
+    let student = {
         name: usrName,
         email: usrEmail,
-        age: usrAge
+        pass: usrPass
     };
     
     //Set up function that is called when reply received from server
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            addUserResultDiv.innerHTML = "User added successfully";
+
+            if(xhttp.responseText=="success"){
+                alert("User added successfully")
+            }else{
+                alert("User already exist please login")
+            }
         }
         else{
-            addUserResultDiv.innerHTML = "<span style='color: red'>Error adding user</span>.";
         }
-        //Refresh list of users
-        loadUsers();
     };
 
     //Send new user data to server
-    xhttp.open("POST", "/users", true);
+    xhttp.open("POST", "/registerstudent", true);
     xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send( JSON.stringify(usrObj) );
+    xhttp.send( JSON.stringify(student) );
 }
