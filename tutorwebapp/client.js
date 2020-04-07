@@ -169,9 +169,9 @@ function registerStudent() {
         if (this.readyState == 4 && this.status == 200) {
 
             if(xhttp.responseText=="success"){
-                alert("User added successfully")
+                toastr.success("User added successfully")
             }else{
-                alert("User already exist please login")
+                toastr.warning("User already exist please login")
             }
         }
         else{

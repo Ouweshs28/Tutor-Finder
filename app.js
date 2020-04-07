@@ -22,8 +22,9 @@ app.use('/', express.static(__dirname + '/www')); // redirect root
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); // redirect bootstrap JS
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
-
-function handlePostRequest(request, response){
+app.use('/js', express.static(__dirname + '/node_modules/toastr')); // redirect CSS bootstrap
+app.use('/css', express.static(__dirname + '/node_modules/toastr/build')); // redirect CSS bootstrap
+function RegStudentPost(request, response){
     //Output the data sent to the server
     let newUser = request.body;
     console.log("Data received: " + JSON.stringify(newUser));
@@ -49,7 +50,7 @@ function handlePostRequest(request, response){
 }
 
 //Set up application to handle POST requests sent to the user path
-app.post('/registerstudent', handlePostRequest);//Adds a new user
+app.post('/registerstudent', RegStudentPost);//Adds a new user
 
 app.listen(9000);
 
