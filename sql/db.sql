@@ -5,9 +5,10 @@ USE twd;
 CREATE TABLE Tutor(
 	tutorID int NOT NULL AUTO_INCREMENT,
 	name VARCHAR(50) NOT NULL,
-	username VARCHAR(10) NOT NULL,
+	username VARCHAR(20) NOT NULL,
 	email VARCHAR(50) NOT NULL,
 	password VARCHAR (50) NOT NULL,
+	qualification VARCHAR (100) NOT NULL,
 	address VARCHAR(50) NOT NULL,
 	region ENUM('NORTH','SOUTH','CENTER','EAST','WEST') NOT NULL,
 	grade VARCHAR(50) NOT NULL,
@@ -24,7 +25,7 @@ CREATE TABLE Student(
 );
 
 CREATE TABLE Review(
-    username VARCHAR(15) NOT NULL,
+    username VARCHAR(20) NOT NULL,
 	tutorID int NOT NULL,
 	rating ENUM('Not recommended','Average','Good','Excellent') NOT NULL,
 	comment VARCHAR (100),
@@ -34,13 +35,13 @@ CREATE TABLE Review(
 );
 
 
-INSERT INTO Tutor (name, username, email, password, address, region, grade, subject, phonenum)
-VALUES ('Ouwesh Seeroo','ouweshs28','ouweshseeroo@gmail.com','os2801','Royal Road Bon Acceuil','EAST','12-13','Computer Science','+23057817861'),
-('Betul Kara','btrxxx','betulkara@gmail.com','bk2011','Fic-en Flacq','WEST','7-9','Turkish','+230512345678'),
-('Zaffar Fakeer','zaffarfakeer','zafarfakeer@gmail.com','zaffar','Port Louis','WEST','12-13','Mathematics','+23057817817'),
-('Aaliyah','aaliyah','aaliyah@gmail.com','aaliyah','Grand Baie','NORTH','7-9','Computer Science, Mathematics','+23057305861'),
-('Vishal Molayee','vmolayee','vmolayee@gmail.com','maths','Phoenix','CENTER','10-11','Mathematics, Additional Mathematics','+23057867861'),
-('Noorjahan ','conayee','nconayee@gmail.com','languages','Souliac','SOUTH','10-11','English Language, French Language','+2305676771');
+INSERT INTO Tutor (name, username, email, password, qualification, address, region, grade, subject, phonenum)
+VALUES ('Ouwesh Seeroo','ouweshs28','ouweshseeroo@gmail.com','os2801','Bsc Computer Science System Eng','Royal Road Bon Acceuil','EAST','12-13','Computer Science','+23057817861'),
+('Betul Kara','btrxxx','betulkara@gmail.com','bk2011','Bsc Psychology','Fic-en Flacq','WEST','7-9','Turkish','+230512345678'),
+('Zaffar Fakeer','zaffarfakeer','zafarfakeer@gmail.com','zaffar','ACCA Level 2, Bsc CSSE','Port Louis','WEST','12-13','Mathematics','+23057817817'),
+('Aaliyah','aaliyah','aaliyah@gmail.com','aaliyah','Bsc Applied Computing','Grand Baie','NORTH','7-9','Computer Science, Mathematics','+23057305861'),
+('Vishal Molayee','vmolayee','vmolayee@gmail.com','maths','Bsc Maths','Phoenix','CENTER','10-11','Mathematics, Additional Mathematics','+23057867861'),
+('Noorjahan ','conayee','nconayee@gmail.com','languages','BA Languages','Souliac','SOUTH','10-11','English Language, French Language','+2305676771');
 
 
 INSERT INTO Student VALUES ('ouweshs28','ouweshseeroo@gmail.com','os2801'),

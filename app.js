@@ -24,6 +24,7 @@ app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redi
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
 app.use('/js', express.static(__dirname + '/node_modules/toastr')); // redirect CSS bootstrap
 app.use('/css', express.static(__dirname + '/node_modules/toastr/build')); // redirect CSS bootstrap
+
 function RegStudentPost(request, response){
     //Output the data sent to the server
     let newUser = request.body;
@@ -49,8 +50,34 @@ function RegStudentPost(request, response){
     response.send("success");
 }
 
+function RegTutorPost(request, response){
+    //Output the data sent to the server
+    let newUser = request.body;
+    console.log("Data received: " + JSON.stringify(newUser));
+
+    //Add user to our data structure
+    console.log(newUser.name);
+
+    //Build query
+    let sql = "INSERT INTO Tutor (name, username, email, password, qualification, address, region, grade, subject, phonenum) VALUES" +
+        "('"+newUser.name+"','"+newUser.username+"','"+newUser.email+"','"+newUser.pass+"','"+newUser.qualification+"','"+newUser.address+"','"+newUser.region+"','"+newUser.class+"','"+newUser.subjects+"','"+newUser.phone+"');";
+
+//Execute query and output results
+    connectionPool.query(sql, (err, result) => {
+        if (err){//Check for errors
+            console.error("Error executing query: " + JSON.stringify(err));
+        }
+        else{
+            console.log("success");
+        }
+    });
+    //Finish off the interaction.
+    response.send("success");
+}
+
 //Set up application to handle POST requests sent to the user path
-app.post('/registerstudent', RegStudentPost);//Adds a new user
+app.post('/registerstudent', RegStudentPost);//Adds a new student user
+app.post('/registertutor', RegTutorPost);//Adds a new tutor user
 
 app.listen(9000);
 
