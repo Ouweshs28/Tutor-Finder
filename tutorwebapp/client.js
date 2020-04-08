@@ -549,6 +549,12 @@ function addReview(id) {
         return;
     }
 
+    if(comments==""){
+        toastr.warning("Please fill up all  the fields");
+        return;
+
+    }
+
     //Create object with user data
     let review = {
         username:username,
@@ -587,6 +593,10 @@ function loginStudent() {
     //Extract user data
     let usrName = document.getElementById("studentUsername").value;
     let usrPass = document.getElementById("studentPassword").value;
+
+    if(usrName=="" ||usrPass==""){
+        toastr.warning("Fill up all fields")
+    }
 
     //Create object with user data
     let student = {
@@ -627,6 +637,10 @@ function loginTutor() {
     let usrName = document.getElementById("tutoruser").value;
     let usrPass = document.getElementById("tutorpass").value;
 
+    if(usrName=="" ||usrPass==""){
+        toastr.warning("Fill up all fields")
+    }
+
     //Create object with user data
     let tutor = {
         name: usrName,
@@ -666,6 +680,10 @@ function registerStudent() {
     let usrName = document.getElementsByName("username")[0].value;
     let usrEmail = document.getElementsByName("email")[0].value;
     let usrPass = document.getElementsByName("password")[0].value;
+
+    if(usrName=="" ||usrPass==""||usrEmail==""){
+        toastr.warning("Fill up all fields")
+    }
 
     //Create object with user data
     let student = {
@@ -713,6 +731,10 @@ function registerTutor() {
     let usrGrade = f.options[e.selectedIndex].text;
     let usrSubjects = document.getElementsByName("subjects")[0].value;
     let usrPhone = document.getElementsByName("phone")[0].value;
+
+    if(usrUsername==""||usrName=="" ||usrPass==""||usrEmail==""||usrQualification==""|| usrSubjects=="" ||usrAddress==""||usrPhone==""){
+        toastr.warning("Fill up all fields")
+    }
 
     //Create object with user data
     let tutor = {
