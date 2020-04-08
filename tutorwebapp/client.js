@@ -523,6 +523,11 @@ function loadReviewDB(tutorID) {
 
             }
 
+            htmlStr += ('<div class="form-group">');
+            htmlStr += ('<button onclick="loadHome()" class="btn-danger btn-block btn-lg">Back</button>');
+            htmlStr += ('</div>');
+            htmlStr += "</div>";
+
             reviewTutorDiv.innerHTML = htmlStr;
         }
 
