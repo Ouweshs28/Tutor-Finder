@@ -27,7 +27,8 @@ function init() {
     tutorPage = document.getElementById("tutors");
     tutorDiv = document.getElementById("tutors");
     reviewTutorDiv = document.getElementById("tutorReview");
-    loadHome()
+    loadHome();
+    CheckSession();
 }
 
 function loadHome() {
@@ -124,6 +125,25 @@ function loadTutors(num) {
     let grade=num;
     loadTutorsDB(grade);
 }
+
+function CheckSession() {
+    let signedIn = false;
+    if (localStorage.usrName != undefined) {
+        signedIn = true;
+        document.getElementById("userSignedIn").style.display="block";
+    }
+    else{
+        document.getElementById("userSignedIn").style.display="none";
+    }
+
+}
+
+function Logout() {
+    localStorage.removeItem('usrName');
+    toastr.success("Successfully logged out");
+
+}
+
 
 function displayTutor(usrArr,grade){
     let str;
@@ -239,6 +259,45 @@ function loadReviewDB(tutorID) {
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify(tutor));
 }
+
+/* Posts a new user to the server. */
+function loginStudent() {
+    //Set up XMLHttpRequest
+    let xhttp = new XMLHttpRequest();
+
+    //Extract user data
+    let usrName = document.getElementById("studentUsername").value;
+    let usrPass = document.getElementById("studentPassword").value;
+
+    //Create object with user data
+    let student = {
+        name: usrName,
+        pass: usrPass
+    };
+
+    //Set up function that is called when reply received from server
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+
+            if (xhttp.responseText == "success") {
+                toastr.success("login successful");
+                localStorage.usrName = usrName;//Store name
+                setTimeout(loadHome,2000)
+
+            } else {
+                toastr.warning("Incorrect username/password");
+
+            }
+        } else {
+        }
+    };
+
+    //Send new user data to server
+    xhttp.open("POST", "/loginstudent", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(student));
+}
+
 
 
 /* Posts a new user to the server. */

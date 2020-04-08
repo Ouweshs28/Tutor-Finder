@@ -18,6 +18,7 @@ const app = express();
 app.use(bodyParser.json());
 let reviews=[];
 let tutorArray=[];
+let studentArray;
 
 
 app.use(express.static('tutorwebapp'));
@@ -61,6 +62,46 @@ function ReviewTutorPost(request, response){
     });
     //Finish off the interaction.
 
+}
+
+function LoginStudentPost(request, response){
+    //Output the data sent to the server
+    let student = request.body;
+    console.log("Data received: " + JSON.stringify(student));
+
+    //Performing query
+    getLogin(student.name,student.pass).then ( result => {
+        //Output reviews.
+        studentArray=(JSON.stringify(result));
+        //Empty array
+        if(studentArray.length===2) {
+            response.send("error");
+        }else{
+            response.send("success");
+        }
+
+    }).catch( err => {//Handle the error
+        console.error(JSON.stringify(err));
+    });
+    //Finish off the interaction.
+
+}
+
+async function getLogin(username,password){
+    //Build query
+    let sql = "SELECT * FROM Student WHERE username="+"'"+username+"' AND password='"+password+"';";
+
+    //Wrap the execution of the query in a promise
+    return new Promise ( (resolve, reject) => {
+        connectionPool.query(sql, (err, result) => {
+            if (err){//Check for errors
+                reject("Error executing query: " + JSON.stringify(err));
+            }
+            else{//Resolve promise with results
+                resolve(result);
+            }
+        });
+    });
 }
 
 function RegStudentPost(request, response){
@@ -170,6 +211,7 @@ function handleGetRequestTutor(request, response){
 app.get('/tutor/*', handleGetRequestTutor);//Returns user with specified ID
 app.get('/tutors', handleGetRequestTutor);//Returns all users
 //Set up application to handle POST requests sent to the user path
+app.post('/loginstudent', LoginStudentPost);//Performs login student
 app.post('/registerstudent', RegStudentPost);//Adds a new student user
 app.post('/registertutor', RegTutorPost);//Adds a new tutor user
 app.post('/reviewstutor', ReviewTutorPost);// Searches for corresponding reviews and displays it
