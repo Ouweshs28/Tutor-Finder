@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 let reviews=[];
 let tutorArray=[];
 let studentArray;
+let tutorLogin;
 
 
 app.use(express.static('tutorwebapp'));
@@ -70,7 +71,7 @@ function LoginStudentPost(request, response){
     console.log("Data received: " + JSON.stringify(student));
 
     //Performing query
-    getLogin(student.name,student.pass).then ( result => {
+    getLoginStudent(student.name,student.pass).then ( result => {
         //Output reviews.
         studentArray=(JSON.stringify(result));
         //Empty array
@@ -87,9 +88,49 @@ function LoginStudentPost(request, response){
 
 }
 
-async function getLogin(username,password){
+async function getLoginStudent(username,password){
     //Build query
     let sql = "SELECT * FROM Student WHERE username="+"'"+username+"' AND password='"+password+"';";
+
+    //Wrap the execution of the query in a promise
+    return new Promise ( (resolve, reject) => {
+        connectionPool.query(sql, (err, result) => {
+            if (err){//Check for errors
+                reject("Error executing query: " + JSON.stringify(err));
+            }
+            else{//Resolve promise with results
+                resolve(result);
+            }
+        });
+    });
+}
+
+function LoginTutorPost(request, response){
+    //Output the data sent to the server
+    let tutorlogin = request.body;
+    console.log("Data received: " + JSON.stringify(tutorlogin));
+
+    //Performing query
+    getLoginTutor(tutorlogin.name,tutorlogin.pass).then ( result => {
+        //Output reviews.
+        tutorLogin=(JSON.stringify(result));
+        //Empty array
+        if(tutorLogin.length===2) {
+            response.send("error");
+        }else{
+            response.send("success");
+        }
+
+    }).catch( err => {//Handle the error
+        console.error(JSON.stringify(err));
+    });
+    //Finish off the interaction.
+
+}
+
+async function getLoginTutor(username,password){
+    //Build query
+    let sql = "SELECT * FROM Tutor WHERE username="+"'"+username+"' AND password='"+password+"';";
 
     //Wrap the execution of the query in a promise
     return new Promise ( (resolve, reject) => {
@@ -211,6 +252,7 @@ function handleGetRequestTutor(request, response){
 app.get('/tutor/*', handleGetRequestTutor);//Returns user with specified ID
 app.get('/tutors', handleGetRequestTutor);//Returns all users
 //Set up application to handle POST requests sent to the user path
+app.post('/logintutor', LoginTutorPost);//Performs login student
 app.post('/loginstudent', LoginStudentPost);//Performs login student
 app.post('/registerstudent', RegStudentPost);//Adds a new student user
 app.post('/registertutor', RegTutorPost);//Adds a new tutor user

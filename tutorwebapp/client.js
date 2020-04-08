@@ -131,6 +131,8 @@ function CheckSession() {
     if (localStorage.usrName != undefined) {
         signedIn = true;
         document.getElementById("userSignedIn").style.display="block";
+        let element = document.getElementById("loginButton");
+        element.classList.add("disabled");
     }
     else{
         document.getElementById("userSignedIn").style.display="none";
@@ -141,6 +143,8 @@ function CheckSession() {
 function Logout() {
     localStorage.removeItem('usrName');
     toastr.success("Successfully logged out");
+    CheckSession();
+    setTimeout(loadHome,1000)
 
 }
 
@@ -260,7 +264,7 @@ function loadReviewDB(tutorID) {
     xhttp.send(JSON.stringify(tutor));
 }
 
-/* Posts a new user to the server. */
+/* Posts login student. */
 function loginStudent() {
     //Set up XMLHttpRequest
     let xhttp = new XMLHttpRequest();
@@ -298,6 +302,44 @@ function loginStudent() {
     xhttp.send(JSON.stringify(student));
 }
 
+/* Posts login tutor. */
+function loginTutor() {
+    //Set up XMLHttpRequest
+    let xhttp = new XMLHttpRequest();
+
+    //Extract user data
+    let usrName = document.getElementById("tutoruser").value;
+    let usrPass = document.getElementById("tutorpass").value;
+
+    //Create object with user data
+    let tutor = {
+        name: usrName,
+        pass: usrPass
+    };
+
+    //Set up function that is called when reply received from server
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+
+            if (xhttp.responseText == "success") {
+                toastr.success("login successful");
+                localStorage.usrName = usrName;//Store name
+                CheckSession();
+                setTimeout(loadHome,2000)
+
+            } else {
+                toastr.warning("Incorrect username/password");
+
+            }
+        } else {
+        }
+    };
+
+    //Send new user data to server
+    xhttp.open("POST", "/logintutor", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(tutor));
+}
 
 
 /* Posts a new user to the server. */
