@@ -11,6 +11,7 @@ let tutorReviewPage;
 let addReviewPage;
 let tutorPage;
 let usrArr;
+let updateStudentPage;
 
 //Set up page when window has loaded
 window.onload = init;
@@ -27,6 +28,7 @@ function init() {
     tutorPage = document.getElementById("tutors");
     tutorDiv = document.getElementById("tutors");
     reviewTutorDiv = document.getElementById("tutorReview");
+    updateStudentPage=document.getElementById("studentUpdate");
     CheckSession();
     loadHome();
 
@@ -41,6 +43,7 @@ function loadHome() {
     tutorReviewPage.style.display = "none";
     addReviewPage.style.display = "none";
     tutorPage.style.display = "none";
+    updateStudentPage.style.display = "none";
 
 }
 
@@ -53,6 +56,7 @@ function loadStudentLogin() {
     tutorReviewPage.style.display = "none";
     addReviewPage.style.display = "none";
     tutorPage.style.display = "none";
+    updateStudentPage.style.display = "none";
 
 }
 
@@ -65,6 +69,7 @@ function loadTutorLogin() {
     tutorReviewPage.style.display = "none";
     addReviewPage.style.display = "none";
     tutorPage.style.display = "none";
+    updateStudentPage.style.display = "none";
 }
 
 function loadStudentReg() {
@@ -76,6 +81,7 @@ function loadStudentReg() {
     tutorReviewPage.style.display = "none";
     addReviewPage.style.display = "none";
     tutorPage.style.display = "none";
+    updateStudentPage.style.display = "none";
 }
 
 function loadTutorReg() {
@@ -87,6 +93,7 @@ function loadTutorReg() {
     tutorReviewPage.style.display = "none";
     addReviewPage.style.display = "none";
     tutorPage.style.display = "none";
+    updateStudentPage.style.display = "none";
 }
 
 function loadTutorReview(tutorID) {
@@ -98,6 +105,7 @@ function loadTutorReview(tutorID) {
     tutorReviewPage.style.display = "block";
     addReviewPage.style.display = "none";
     tutorPage.style.display = "none";
+    updateStudentPage.style.display = "none";
     loadReviewDB(tutorID);
 
 }
@@ -111,10 +119,24 @@ function loadAddTutorReview(name,id) {
     tutorReviewPage.style.display = "none";
     addReviewPage.style.display = "block";
     tutorPage.style.display = "none";
+    updateStudentPage.style.display = "none";
     TutorAddTitle=document.getElementById("tutorTitle").innerText=name;
     document.getElementById("addreviewBtn").onclick = function() { addReview(id); };
 
 
+
+}
+
+function loadMyStudent() {
+    homePage.style.display = "none";
+    loginTutorPage.style.display = "none";
+    loginStudentPage.style.display = "none";
+    registerTutorPage.style.display = "none";
+    registerStudentPage.style.display = "none";
+    tutorReviewPage.style.display = "none";
+    addReviewPage.style.display = "none";
+    tutorPage.style.display = "none";
+    updateStudentPage.style.display = "block";
 
 }
 
@@ -127,6 +149,7 @@ function loadTutors(num) {
     tutorReviewPage.style.display = "none";
     addReviewPage.style.display = "none";
     tutorPage.style.display = "block";
+    updateStudentPage.style.display = "none";
     let grade=num;
     loadTutorsDB(grade);
 }
@@ -153,6 +176,105 @@ function Logout() {
     setTimeout(loadHome,1000);
     CheckSession();
 
+}
+
+function checkUser() {
+    if(localStorage.key(0)=="student"){
+        let key=localStorage.key(0);
+        let name=localStorage.getItem(key);
+        getMyStudent(name)
+
+    }else {
+
+    }
+
+}
+
+function getMyStudent(name){
+    loadMyStudent();
+
+    //Set up XMLHttpRequest
+    let xhttp = new XMLHttpRequest();
+
+    let student={
+        username:name
+    };
+    xhttp.onreadystatechange = () => {//Called when data returns from server
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            //Convert JSON to a JavaScript object
+            let usrArr = JSON.parse(xhttp.responseText);
+
+            //Return if no users
+            if(usrArr.length === 0)
+                return;
+
+            //Build string with user data
+
+            let htmlStr = '<h2>My Account</h2>';
+            for(let key in usrArr){
+                htmlStr += ('<div class="form-group">');
+                htmlStr += ('<input type="text" class="form-control" name="username" id="updateusernameS" value="'+usrArr[key].username+'"disabled>');
+                htmlStr += ('</div>');
+                htmlStr += ('<div class="form-group">');
+                htmlStr += ('<input type="email" class="form-control" name="email" id="updateemailS" value="'+usrArr[key].email+'">');
+                htmlStr += ('</div>');
+                htmlStr += ('<div class="form-group">');
+                htmlStr += ('<input type="password" class="form-control" name="password" id="updatepassS" placeholder="Password" required="required">');
+                htmlStr += ('</div>');
+            }
+            htmlStr += ('<div class="form-group">');
+            htmlStr += ('<button onclick="PerformUpdateStudent()" class="btn btn-primary btn-block btn-lg">Update</button>');
+            htmlStr += ('</div>');
+            htmlStr += ('<div class="form-group">');
+            htmlStr += ('<button onclick="loadHome()" class="btn-danger btn-block btn-lg">Cancel</button>');
+            htmlStr += ('</div>');
+            htmlStr += "</div>";
+            updateStudentPage.innerHTML = htmlStr;
+        }
+    };
+
+    //Request data from all users
+    xhttp.open("POST", "/studentinfo", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(student));
+}
+
+function PerformUpdateStudent() {
+    //Set up XMLHttpRequest
+    let xhttp = new XMLHttpRequest();
+
+    //Extract user data
+    let usrName = document.getElementById("updateusernameS").value;
+    let usrEmail = document.getElementById("updateemailS").value;
+    let usrPass = document.getElementById("updatepassS").value;
+
+    //Create object with user data
+    let student = {
+        name: usrName,
+        email: usrEmail,
+        pass: usrPass
+    };
+
+    //Set up function that is called when reply received from server
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+
+            if (xhttp.responseText == "success") {
+                toastr.success("Info successfully updated");
+                setTimeout(loadHome,2000)
+
+            } else {
+                toastr.warning("error try again");
+
+            }
+        } else {
+        }
+    };
+
+    //Send new user data to server
+    xhttp.open("POST", "/updatestudentinfo", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(student));
 }
 
 
@@ -198,7 +320,7 @@ function displayTutor(usrArr,grade){
 
 }
 
-/* Loads current users and adds them to the page. */
+/* Loads current tutors and adds them to the page. */
 function loadTutorsDB(grade) {
     //Set up XMLHttpRequest
     let xhttp = new XMLHttpRequest();

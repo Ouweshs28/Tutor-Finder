@@ -47,6 +47,41 @@ async function getTutorReviews(id){
     });
 }
 
+function MyStudentPost(request, response){
+    //Output the data sent to the server
+    let student = request.body;
+    console.log("Data received: " + JSON.stringify(student));
+
+    //Performing query
+    getStudent(student.username).then ( result => {
+        //Output reviews.
+       reviews=(JSON.stringify(result));
+       response.send(reviews);
+
+    }).catch( err => {//Handle the error
+        console.error(JSON.stringify(err));
+    });
+    //Finish off the interaction.
+
+}
+
+async function getStudent(name){
+    //Build query
+    let sql = "SELECT * FROM Student WHERE username="+"'"+name+"';";
+
+    //Wrap the execution of the query in a promise
+    return new Promise ( (resolve, reject) => {
+        connectionPool.query(sql, (err, result) => {
+            if (err){//Check for errors
+                reject("Error executing query: " + JSON.stringify(err));
+            }
+            else{//Resolve promise with results
+                resolve(result);
+            }
+        });
+    });
+}
+
 function ReviewTutorPost(request, response){
     //Output the data sent to the server
     let tutor = request.body;
@@ -55,8 +90,8 @@ function ReviewTutorPost(request, response){
     //Performing query
     getTutorReviews(tutor.id).then ( result => {
         //Output reviews.
-       reviews=(JSON.stringify(result));
-       response.send(reviews);
+        reviews=(JSON.stringify(result));
+        response.send(reviews);
 
     }).catch( err => {//Handle the error
         console.error(JSON.stringify(err));
@@ -164,6 +199,31 @@ function RegStudentPost(request, response){
         }
         else{
             console.log("success");
+        }
+    });
+    //Finish off the interaction.
+    response.send("success");
+}
+
+function UpdateStudentPost(request, response){
+    //Output the data sent to the server
+    let newUser = request.body;
+    console.log("Data received: " + JSON.stringify(newUser));
+
+    //Add user to our data structure
+    console.log(newUser.name);
+
+    //Build query
+    let sql = "UPDATE Student SET email= " +
+        "'"+newUser.email+"',password='"+newUser.pass+"' WHERE username='"+newUser.name+"';";
+//Execute query and output results
+    connectionPool.query(sql, (err, result) => {
+        if (err){//Check for errors
+            console.error("Error executing query: " + JSON.stringify(err));
+        }
+        else{
+            console.log("success");
+            console.log(result.affectedRows + ' rows updated');
         }
     });
     //Finish off the interaction.
@@ -280,6 +340,8 @@ app.post('/loginstudent', LoginStudentPost);//Performs login student
 app.post('/registerstudent', RegStudentPost);//Adds a new student user
 app.post('/registertutor', RegTutorPost);//Adds a new tutor user
 app.post('/addreview', AddReviewPost);//Adds a review
+app.post('/studentinfo', MyStudentPost);//Performs query to get current logged in user details
+app.post('/updatestudentinfo', UpdateStudentPost);// performs update for student user
 app.post('/reviewstutor', ReviewTutorPost);// Searches for corresponding reviews and displays it
 
 app.listen(9000);
