@@ -28,7 +28,7 @@ function init() {
     tutorPage = document.getElementById("tutors");
     tutorDiv = document.getElementById("tutors");
     reviewTutorDiv = document.getElementById("tutorReview");
-    updateStudentPage=document.getElementById("studentUpdate");
+    updateStudentPage = document.getElementById("studentUpdate");
     CheckSession();
     loadHome();
 
@@ -110,7 +110,7 @@ function loadTutorReview(tutorID) {
 
 }
 
-function loadAddTutorReview(name,id) {
+function loadAddTutorReview(name, id) {
     homePage.style.display = "none";
     loginTutorPage.style.display = "none";
     loginStudentPage.style.display = "none";
@@ -120,9 +120,10 @@ function loadAddTutorReview(name,id) {
     addReviewPage.style.display = "block";
     tutorPage.style.display = "none";
     updateStudentPage.style.display = "none";
-    TutorAddTitle=document.getElementById("tutorTitle").innerText=name;
-    document.getElementById("addreviewBtn").onclick = function() { addReview(id); };
-
+    TutorAddTitle = document.getElementById("tutorTitle").innerText = name;
+    document.getElementById("addreviewBtn").onclick = function () {
+        addReview(id);
+    };
 
 
 }
@@ -150,20 +151,19 @@ function loadTutors(num) {
     addReviewPage.style.display = "none";
     tutorPage.style.display = "block";
     updateStudentPage.style.display = "none";
-    let grade=num;
+    let grade = num;
     loadTutorsDB(grade);
 }
 
 function CheckSession() {
     let signedIn = false;
-    if (localStorage.student != undefined ||localStorage.tutor != undefined ) {
+    if (localStorage.student != undefined || localStorage.tutor != undefined) {
         signedIn = true;
-        document.getElementById("userSignedIn").style.display="block";
+        document.getElementById("userSignedIn").style.display = "block";
         let element = document.getElementById("loginButton");
         element.classList.add("disabled");
-    }
-    else{
-        document.getElementById("userSignedIn").style.display="none";
+    } else {
+        document.getElementById("userSignedIn").style.display = "none";
         let element = document.getElementById("loginButton");
         element.classList.remove("disabled");
     }
@@ -173,32 +173,32 @@ function CheckSession() {
 function Logout() {
     localStorage.clear();
     toastr.success("Successfully logged out");
-    setTimeout(loadHome,1000);
+    setTimeout(loadHome, 1000);
     CheckSession();
 
 }
 
 function checkUser() {
-    let key=localStorage.key(0);
-    let name=localStorage.getItem(key);
-    if(localStorage.key(0)=="student"){
+    let key = localStorage.key(0);
+    let name = localStorage.getItem(key);
+    if (localStorage.key(0) == "student") {
         getMyStudent(name)
 
-    }else {
+    } else {
         getMyTutor(name);
 
     }
 
 }
 
-function getMyTutor(name){
+function getMyTutor(name) {
     loadMyStudent();
 
     //Set up XMLHttpRequest
     let xhttp = new XMLHttpRequest();
 
-    let tutor={
-        username:name
+    let tutor = {
+        username: name
     };
     xhttp.onreadystatechange = () => {//Called when data returns from server
         if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -207,30 +207,30 @@ function getMyTutor(name){
             console.log(usrArr);
 
             //Return if no users
-            if(usrArr.length === 0)
+            if (usrArr.length === 0)
                 return;
 
             //Build string with user data
 
             let htmlStr = '<h2>My Account</h2>';
-            for(let key in usrArr){
+            for (let key in usrArr) {
                 htmlStr += ('<div class="form-group">');
-                htmlStr += ('<input type="text" class="form-control" name="name" id="updatenameT" value="'+usrArr[key].name+'"disabled>');
+                htmlStr += ('<input type="text" class="form-control" name="name" id="updatenameT" value="' + usrArr[key].name + '"disabled>');
                 htmlStr += ('</div>');
                 htmlStr += ('<div class="form-group">');
-                htmlStr += ('<input type="text" class="form-control" name="username" id="updateusernameT" value="'+usrArr[key].username+'"disabled>');
+                htmlStr += ('<input type="text" class="form-control" name="username" id="updateusernameT" value="' + usrArr[key].username + '"disabled>');
                 htmlStr += ('</div>');
                 htmlStr += ('<div class="form-group">');
-                htmlStr += ('<input type="email" class="form-control" name="email" id="updateemailT" placeholder="Email" value="'+usrArr[key].email+'">');
+                htmlStr += ('<input type="email" class="form-control" name="email" id="updateemailT" placeholder="Email" value="' + usrArr[key].email + '">');
                 htmlStr += ('</div>');
                 htmlStr += ('<div class="form-group">');
                 htmlStr += ('<input type="password" class="form-control" name="password" id="updatepassT" placeholder="Password" required="required">');
                 htmlStr += ('</div>');
                 htmlStr += ('<div class="form-group">');
-                htmlStr += ('<input type="text" class="form-control" name="quatification" id="updatequalification" placeholder="quatification" required="required" value="'+usrArr[key].qualification+'">');
+                htmlStr += ('<input type="text" class="form-control" name="quatification" id="updatequalification" placeholder="quatification" required="required" value="' + usrArr[key].qualification + '">');
                 htmlStr += ('</div>');
                 htmlStr += ('<div class="form-group">');
-                htmlStr += ('<input type="text" class="form-control" name="address" id="updateaddress" placeholder="Address" required="required" value="'+usrArr[key].address+'">');
+                htmlStr += ('<input type="text" class="form-control" name="address" id="updateaddress" placeholder="Address" required="required" value="' + usrArr[key].address + '">');
                 htmlStr += ('</div>');
                 htmlStr += ('<div class="form-group">');
                 htmlStr += ('<p class="selectOption">Region :  </p>');
@@ -255,10 +255,10 @@ function getMyTutor(name){
                     '            </label>' +
                     '        </div>');
                 htmlStr += ('<div class="form-group">');
-                htmlStr += ('<input type="text" class="form-control" name="subjects" placeholder="Subjects" id="updatesubjects" value="'+usrArr[key].subject+'">');
+                htmlStr += ('<input type="text" class="form-control" name="subjects" placeholder="Subjects" id="updatesubjects" value="' + usrArr[key].subject + '">');
                 htmlStr += ('</div>');
                 htmlStr += ('<div class="form-group">');
-                htmlStr += ('<input type="text" class="form-control" name="phone" placeholder="Phone" id="updatephone" value="'+usrArr[key].phonenum+'">');
+                htmlStr += ('<input type="text" class="form-control" name="phone" placeholder="Phone" id="updatephone" value="' + usrArr[key].phonenum + '">');
                 htmlStr += ('</div>');
             }
             htmlStr += ('<div class="form-group">');
@@ -318,7 +318,7 @@ function PerformUpdateTutor() {
 
             if (xhttp.responseText == "success") {
                 toastr.success("Info successfully updated");
-                setTimeout(loadHome,2000)
+                setTimeout(loadHome, 2000)
 
             } else {
                 toastr.warning("error try again");
@@ -334,14 +334,14 @@ function PerformUpdateTutor() {
     xhttp.send(JSON.stringify(tutor));
 }
 
-function getMyStudent(name){
+function getMyStudent(name) {
     loadMyStudent();
 
     //Set up XMLHttpRequest
     let xhttp = new XMLHttpRequest();
 
-    let student={
-        username:name
+    let student = {
+        username: name
     };
     xhttp.onreadystatechange = () => {//Called when data returns from server
         if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -349,18 +349,18 @@ function getMyStudent(name){
             let usrArr = JSON.parse(xhttp.responseText);
 
             //Return if no users
-            if(usrArr.length === 0)
+            if (usrArr.length === 0)
                 return;
 
             //Build string with user data
 
             let htmlStr = '<h2>My Account</h2>';
-            for(let key in usrArr){
+            for (let key in usrArr) {
                 htmlStr += ('<div class="form-group">');
-                htmlStr += ('<input type="text" class="form-control" name="username" id="updateusernameS" value="'+usrArr[key].username+'"disabled>');
+                htmlStr += ('<input type="text" class="form-control" name="username" id="updateusernameS" value="' + usrArr[key].username + '"disabled>');
                 htmlStr += ('</div>');
                 htmlStr += ('<div class="form-group">');
-                htmlStr += ('<input type="email" class="form-control" name="email" id="updateemailS" value="'+usrArr[key].email+'">');
+                htmlStr += ('<input type="email" class="form-control" name="email" id="updateemailS" value="' + usrArr[key].email + '">');
                 htmlStr += ('</div>');
                 htmlStr += ('<div class="form-group">');
                 htmlStr += ('<input type="password" class="form-control" name="password" id="updatepassS" placeholder="Password" required="required">');
@@ -405,7 +405,7 @@ function PerformUpdateStudent() {
 
             if (xhttp.responseText == "success") {
                 toastr.success("Info successfully updated");
-                setTimeout(loadHome,2000)
+                setTimeout(loadHome, 2000)
 
             } else {
                 toastr.warning("error try again");
@@ -422,15 +422,15 @@ function PerformUpdateStudent() {
 }
 
 
-function displayTutor(usrArr,grade){
+function displayTutor(usrArr, grade) {
     let str;
 
-    if(grade==1){
-        str='7-9'
-    }else if(grade==2){
-        str='10-11';
-    }else if(grade==3){
-        str='12-13';
+    if (grade == 1) {
+        str = '7-9'
+    } else if (grade == 2) {
+        str = '10-11';
+    } else if (grade == 3) {
+        str = '12-13';
     }
 
     //Return if tutors
@@ -472,7 +472,7 @@ function loadTutorsDB(grade) {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             //Convert JSON to a JavaScript object
             usrArr = JSON.parse(xhttp.responseText);
-            displayTutor(usrArr,grade)
+            displayTutor(usrArr, grade)
         }
     };
 
@@ -515,9 +515,9 @@ function loadReviewDB(tutorID) {
                 htmlStr += ('<div class="card-body">');
                 htmlStr += ('<div class="card">');
                 htmlStr += (' <div class="card-body">');
-                htmlStr += (' <h5 class="card-title">'+ReviewArr[key].username+'</h5>');
-                htmlStr += (' <p class="card-text">Rating:'+ReviewArr[key].rating+'</p>');
-                htmlStr += ('<p class="card-text">Comments:'+ReviewArr[key].comment+'</p>');
+                htmlStr += (' <h5 class="card-title">' + ReviewArr[key].username + '</h5>');
+                htmlStr += (' <p class="card-text">Rating:' + ReviewArr[key].rating + '</p>');
+                htmlStr += ('<p class="card-text">Comments:' + ReviewArr[key].comment + '</p>');
                 htmlStr += ('</div>');
                 htmlStr += (' </div>');
 
@@ -539,17 +539,17 @@ function addReview(id) {
 
     //Extract user data
     let tutorid = id;
-    let username=localStorage.getItem("usrName");
+    let username = localStorage.getItem("usrName");
     let comments = document.getElementById("exampleFormControlTextarea1").value;
     let e = document.getElementById("rating");
     let rating = e.options[e.selectedIndex].text;
 
-    if(username===null){
+    if (username === null) {
         toastr.warning("please sign in first");
         return;
     }
 
-    if(comments==""){
+    if (comments == "") {
         toastr.warning("Please fill up all  the fields");
         return;
 
@@ -557,10 +557,10 @@ function addReview(id) {
 
     //Create object with user data
     let review = {
-        username:username,
+        username: username,
         id: tutorid,
         rating: rating,
-        comment:comments
+        comment: comments
     };
 
     //Set up function that is called when reply received from server
@@ -569,7 +569,7 @@ function addReview(id) {
 
             if (xhttp.responseText == "success") {
                 toastr.success("review added");
-                setTimeout(loadHome,2000)
+                setTimeout(loadHome, 2000)
 
             } else {
                 toastr.warning("error try again");
@@ -594,8 +594,9 @@ function loginStudent() {
     let usrName = document.getElementById("studentUsername").value;
     let usrPass = document.getElementById("studentPassword").value;
 
-    if(usrName=="" ||usrPass==""){
-        toastr.warning("Fill up all fields")
+    if (usrName == "" || usrPass == "") {
+        toastr.warning("Fill up all fields");
+        return;
     }
 
     //Create object with user data
@@ -611,7 +612,7 @@ function loginStudent() {
             if (xhttp.responseText == "success") {
                 toastr.success("login successful");
                 localStorage.student = usrName;//Store name
-                setTimeout(loadHome,2000)
+                setTimeout(loadHome, 2000)
                 CheckSession();
 
             } else {
@@ -637,8 +638,9 @@ function loginTutor() {
     let usrName = document.getElementById("tutoruser").value;
     let usrPass = document.getElementById("tutorpass").value;
 
-    if(usrName=="" ||usrPass==""){
-        toastr.warning("Fill up all fields")
+    if (usrName == "" || usrPass == "") {
+        toastr.warning("Fill up all fields");
+        return;
     }
 
     //Create object with user data
@@ -654,7 +656,7 @@ function loginTutor() {
             if (xhttp.responseText == "success") {
                 toastr.success("login successful");
                 localStorage.tutor = usrName;//Store name
-                setTimeout(loadHome,2000)
+                setTimeout(loadHome, 2000)
                 CheckSession();
             } else {
                 toastr.warning("Incorrect username/password");
@@ -681,8 +683,9 @@ function registerStudent() {
     let usrEmail = document.getElementsByName("email")[0].value;
     let usrPass = document.getElementsByName("password")[0].value;
 
-    if(usrName=="" ||usrPass==""||usrEmail==""){
-        toastr.warning("Fill up all fields")
+    if (usrName == "" || usrPass == "" || usrEmail == "") {
+        toastr.warning("Fill up all fields");
+        return;
     }
 
     //Create object with user data
@@ -732,8 +735,9 @@ function registerTutor() {
     let usrSubjects = document.getElementsByName("subjects")[0].value;
     let usrPhone = document.getElementsByName("phone")[0].value;
 
-    if(usrUsername==""||usrName=="" ||usrPass==""||usrEmail==""||usrQualification==""|| usrSubjects=="" ||usrAddress==""||usrPhone==""){
+    if (usrUsername == "" || usrName == "" || usrPass == "" || usrEmail == "" || usrQualification == "" || usrSubjects == "" || usrAddress == "" || usrPhone == "") {
         toastr.warning("Fill up all fields")
+        return;
     }
 
     //Create object with user data

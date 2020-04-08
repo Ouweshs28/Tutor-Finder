@@ -16,8 +16,8 @@ const connectionPool = mysql.createPool({
 //Create express app and configure it with body-parser
 const app = express();
 app.use(bodyParser.json());
-let reviews=[];
-let tutorArray=[];
+let reviews = [];
+let tutorArray = [];
 let studentArray;
 let tutorLogin;
 
@@ -30,192 +30,187 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/js', express.static(__dirname + '/node_modules/toastr')); // redirect CSS bootstrap
 app.use('/css', express.static(__dirname + '/node_modules/toastr/build')); // redirect CSS bootstrap
 
-async function getTutorReviews(id){
+async function getTutorReviews(id) {
     //Build query
-    let sql = "SELECT * FROM Review WHERE tutorID="+id;
+    let sql = "SELECT * FROM Review WHERE tutorID=" + id;
 
     //Wrap the execution of the query in a promise
-    return new Promise ( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         connectionPool.query(sql, (err, result) => {
-            if (err){//Check for errors
+            if (err) {//Check for errors
                 reject("Error executing query: " + JSON.stringify(err));
-            }
-            else{//Resolve promise with results
+            } else {//Resolve promise with results
                 resolve(result);
             }
         });
     });
 }
 
-function MyStudentPost(request, response){
+function MyStudentPost(request, response) {
     //Output the data sent to the server
     let student = request.body;
     console.log("Data received: " + JSON.stringify(student));
 
     //Performing query
-    getStudent(student.username).then ( result => {
+    getStudent(student.username).then(result => {
         //Output reviews.
-        reviews=(JSON.stringify(result));
+        reviews = (JSON.stringify(result));
         response.send(reviews);
 
-    }).catch( err => {//Handle the error
+    }).catch(err => {//Handle the error
         console.error(JSON.stringify(err));
     });
     //Finish off the interaction.
 
 }
 
-async function getTutor(name){
+async function getTutor(name) {
     //Build query
-    let sql = "SELECT * FROM Tutor WHERE username="+"'"+name+"';";
+    let sql = "SELECT * FROM Tutor WHERE username=" + "'" + name + "';";
 
     //Wrap the execution of the query in a promise
-    return new Promise ( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         connectionPool.query(sql, (err, result) => {
-            if (err){//Check for errors
+            if (err) {//Check for errors
                 reject("Error executing query: " + JSON.stringify(err));
-            }
-            else{//Resolve promise with results
+            } else {//Resolve promise with results
                 resolve(result);
             }
         });
     });
 }
 
-function MyTutorPost(request, response){
+function MyTutorPost(request, response) {
     //Output the data sent to the server
     let tutor = request.body;
     console.log("Data received: " + JSON.stringify(tutor));
 
     //Performing query
-    getTutor(tutor.username).then ( result => {
+    getTutor(tutor.username).then(result => {
         //Output reviews.
-       reviews=(JSON.stringify(result));
-       response.send(reviews);
+        reviews = (JSON.stringify(result));
+        response.send(reviews);
 
-    }).catch( err => {//Handle the error
+    }).catch(err => {//Handle the error
         console.error(JSON.stringify(err));
     });
     //Finish off the interaction.
 
 }
 
-async function getStudent(name){
+async function getStudent(name) {
     //Build query
-    let sql = "SELECT * FROM Student WHERE username="+"'"+name+"';";
+    let sql = "SELECT * FROM Student WHERE username=" + "'" + name + "';";
 
     //Wrap the execution of the query in a promise
-    return new Promise ( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         connectionPool.query(sql, (err, result) => {
-            if (err){//Check for errors
+            if (err) {//Check for errors
                 reject("Error executing query: " + JSON.stringify(err));
-            }
-            else{//Resolve promise with results
+            } else {//Resolve promise with results
                 resolve(result);
             }
         });
     });
 }
 
-function ReviewTutorPost(request, response){
+function ReviewTutorPost(request, response) {
     //Output the data sent to the server
     let tutor = request.body;
     console.log("Data received: " + JSON.stringify(tutor));
 
     //Performing query
-    getTutorReviews(tutor.id).then ( result => {
+    getTutorReviews(tutor.id).then(result => {
         //Output reviews.
-        reviews=(JSON.stringify(result));
+        reviews = (JSON.stringify(result));
         response.send(reviews);
 
-    }).catch( err => {//Handle the error
+    }).catch(err => {//Handle the error
         console.error(JSON.stringify(err));
     });
     //Finish off the interaction.
 
 }
 
-function LoginStudentPost(request, response){
+function LoginStudentPost(request, response) {
     //Output the data sent to the server
     let student = request.body;
     console.log("Data received: " + JSON.stringify(student));
 
     //Performing query
-    getLoginStudent(student.name,student.pass).then ( result => {
+    getLoginStudent(student.name, student.pass).then(result => {
         //Output reviews.
-        studentArray=(JSON.stringify(result));
+        studentArray = (JSON.stringify(result));
         //Empty array
-        if(studentArray.length===2) {
+        if (studentArray.length === 2) {
             response.send("error");
-        }else{
+        } else {
             response.send("success");
         }
 
-    }).catch( err => {//Handle the error
+    }).catch(err => {//Handle the error
         console.error(JSON.stringify(err));
     });
     //Finish off the interaction.
 
 }
 
-async function getLoginStudent(username,password){
+async function getLoginStudent(username, password) {
     //Build query
-    let sql = "SELECT * FROM Student WHERE username="+"'"+username+"' AND password='"+password+"';";
+    let sql = "SELECT * FROM Student WHERE username=" + "'" + username + "' AND password='" + password + "';";
 
     //Wrap the execution of the query in a promise
-    return new Promise ( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         connectionPool.query(sql, (err, result) => {
-            if (err){//Check for errors
+            if (err) {//Check for errors
                 reject("Error executing query: " + JSON.stringify(err));
-            }
-            else{//Resolve promise with results
+            } else {//Resolve promise with results
                 resolve(result);
             }
         });
     });
 }
 
-function LoginTutorPost(request, response){
+function LoginTutorPost(request, response) {
     //Output the data sent to the server
     let tutorlogin = request.body;
     console.log("Data received: " + JSON.stringify(tutorlogin));
 
     //Performing query
-    getLoginTutor(tutorlogin.name,tutorlogin.pass).then ( result => {
+    getLoginTutor(tutorlogin.name, tutorlogin.pass).then(result => {
         //Output reviews.
-        tutorLogin=(JSON.stringify(result));
+        tutorLogin = (JSON.stringify(result));
         //Empty array
-        if(tutorLogin.length===2) {
+        if (tutorLogin.length === 2) {
             response.send("error");
-        }else{
+        } else {
             response.send("success");
         }
 
-    }).catch( err => {//Handle the error
+    }).catch(err => {//Handle the error
         console.error(JSON.stringify(err));
     });
     //Finish off the interaction.
 
 }
 
-async function getLoginTutor(username,password){
+async function getLoginTutor(username, password) {
     //Build query
-    let sql = "SELECT * FROM Tutor WHERE username="+"'"+username+"' AND password='"+password+"';";
+    let sql = "SELECT * FROM Tutor WHERE username=" + "'" + username + "' AND password='" + password + "';";
 
     //Wrap the execution of the query in a promise
-    return new Promise ( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         connectionPool.query(sql, (err, result) => {
-            if (err){//Check for errors
+            if (err) {//Check for errors
                 reject("Error executing query: " + JSON.stringify(err));
-            }
-            else{//Resolve promise with results
+            } else {//Resolve promise with results
                 resolve(result);
             }
         });
     });
 }
 
-function RegStudentPost(request, response){
+function RegStudentPost(request, response) {
     //Output the data sent to the server
     let newUser = request.body;
     console.log("Data received: " + JSON.stringify(newUser));
@@ -225,22 +220,20 @@ function RegStudentPost(request, response){
 
     //Build query
     let sql = "INSERT INTO Student VALUES" +
-        "('"+newUser.name+"','"+newUser.email+"','"+newUser.pass+"');";
+        "('" + newUser.name + "','" + newUser.email + "','" + newUser.pass + "');";
 
 //Execute query and output results
     connectionPool.query(sql, (err, result) => {
-        if (err){//Check for errors
+        if (err) {//Check for errors
             console.error("Error executing query: " + JSON.stringify(err));
-        }
-        else{
+        } else {
             console.log("success");
         }
     });
     //Finish off the interaction.
-    response.send("success");
 }
 
-function UpdateStudentPost(request, response){
+function UpdateStudentPost(request, response) {
     //Output the data sent to the server
     let newUser = request.body;
     console.log("Data received: " + JSON.stringify(newUser));
@@ -250,22 +243,20 @@ function UpdateStudentPost(request, response){
 
     //Build query
     let sql = "UPDATE Student SET email= " +
-        "'"+newUser.email+"',password='"+newUser.pass+"' WHERE username='"+newUser.name+"';";
+        "'" + newUser.email + "',password='" + newUser.pass + "' WHERE username='" + newUser.name + "';";
 //Execute query and output results
     connectionPool.query(sql, (err, result) => {
-        if (err){//Check for errors
+        if (err) {//Check for errors
             console.error("Error executing query: " + JSON.stringify(err));
-        }
-        else{
+        } else {
             console.log("success");
             console.log(result.affectedRows + ' rows updated');
         }
     });
     //Finish off the interaction.
-    response.send("success");
 }
 
-function UpdateTutorPost(request, response){
+function UpdateTutorPost(request, response) {
     //Output the data sent to the server
     let newUser = request.body;
     console.log("Data received: " + JSON.stringify(newUser));
@@ -275,13 +266,12 @@ function UpdateTutorPost(request, response){
 
     //Build query
     let sql = "UPDATE Tutor SET email= " +
-        "'"+newUser.email+"',password='"+newUser.pass+"' ,qualification='"+newUser.qualification+"' ,address='"+newUser.address+"' , region='"+newUser.region+"', grade='"+newUser.class+"', subject='"+newUser.subjects+"', phonenum='"+newUser.phone+"' WHERE username='"+newUser.name+"';";
+        "'" + newUser.email + "',password='" + newUser.pass + "' ,qualification='" + newUser.qualification + "' ,address='" + newUser.address + "' , region='" + newUser.region + "', grade='" + newUser.class + "', subject='" + newUser.subjects + "', phonenum='" + newUser.phone + "' WHERE username='" + newUser.name + "';";
 //Execute query and output results
     connectionPool.query(sql, (err, result) => {
-        if (err){//Check for errors
+        if (err) {//Check for errors
             console.error("Error executing query: " + JSON.stringify(err));
-        }
-        else{
+        } else {
             console.log("success");
             console.log(result.affectedRows + ' rows updated');
         }
@@ -290,7 +280,7 @@ function UpdateTutorPost(request, response){
     response.send("success");
 }
 
-function RegTutorPost(request, response){
+function RegTutorPost(request, response) {
     //Output the data sent to the server
     let newUser = request.body;
     console.log("Data received: " + JSON.stringify(newUser));
@@ -300,22 +290,20 @@ function RegTutorPost(request, response){
 
     //Build query
     let sql = "INSERT INTO Tutor (name, username, email, password, qualification, address, region, grade, subject, phonenum) VALUES" +
-        "('"+newUser.name+"','"+newUser.username+"','"+newUser.email+"','"+newUser.pass+"','"+newUser.qualification+"','"+newUser.address+"','"+newUser.region+"','"+newUser.class+"','"+newUser.subjects+"','"+newUser.phone+"');";
+        "('" + newUser.name + "','" + newUser.username + "','" + newUser.email + "','" + newUser.pass + "','" + newUser.qualification + "','" + newUser.address + "','" + newUser.region + "','" + newUser.class + "','" + newUser.subjects + "','" + newUser.phone + "');";
 
 //Execute query and output results
     connectionPool.query(sql, (err, result) => {
-        if (err){//Check for errors
+        if (err) {//Check for errors
             console.error("Error executing query: " + JSON.stringify(err));
-        }
-        else{
+        } else {
             console.log("success");
         }
     });
     //Finish off the interaction.
-    response.send("success");
 }
 
-function AddReviewPost(request, response){
+function AddReviewPost(request, response) {
     //Output the data sent to the server
     let review = request.body;
     console.log("Data received: " + JSON.stringify(review));
@@ -323,34 +311,31 @@ function AddReviewPost(request, response){
 
     //Build query
     let sql = "INSERT INTO Review VALUES" +
-        "('"+review.username+"',"+review.id+",'"+review.rating+"','"+review.comment+"');";
+        "('" + review.username + "'," + review.id + ",'" + review.rating + "','" + review.comment + "');";
 
 //Execute query and output results
     connectionPool.query(sql, (err, result) => {
-        if (err){//Check for errors
+        if (err) {//Check for errors
             console.error("Error executing query: " + JSON.stringify(err));
-        }
-        else{
+        } else {
             console.log("success");
         }
     });
     //Finish off the interaction.
-    response.send("success");
 }
 
 
 /* Returns a promise to get tutors. */
-async function getTutors(){
+async function getTutors() {
     //Build query
     let sql = "SELECT * FROM Tutor";
 
     //Wrap the execution of the query in a promise
-    return new Promise ( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         connectionPool.query(sql, (err, result) => {
-            if (err){//Check for errors
+            if (err) {//Check for errors
                 reject("Error executing query: " + JSON.stringify(err));
-            }
-            else{//Resolve promise with results
+            } else {//Resolve promise with results
                 resolve(result);
             }
         });
@@ -358,7 +343,7 @@ async function getTutors(){
 }
 
 
-function handleGetRequestTutor(request, response){
+function handleGetRequestTutor(request, response) {
 
     //Split the path of the request into its components
     let pathArray = request.url.split("/");
@@ -367,15 +352,15 @@ function handleGetRequestTutor(request, response){
     let pathEnd = pathArray[pathArray.length - 1];
 
     //If path ends with 'users' we return all users
-    if(pathEnd === 'tutors'){
-        getTutors().then ( result => {
+    if (pathEnd === 'tutors') {
+        getTutors().then(result => {
             //Output employees.
-            tutorArray=JSON.stringify(result);
+            tutorArray = JSON.stringify(result);
             //Do something else
             response.send(tutorArray);
 
 
-        }).catch( err => {//Handle the error
+        }).catch(err => {//Handle the error
             console.error(JSON.stringify(err));
         });
 
@@ -383,7 +368,7 @@ function handleGetRequestTutor(request, response){
     }
 
     //If the last part of the path is a valid user id, return data about that user
-    else if(pathEnd in tutorArray){
+    else if (pathEnd in tutorArray) {
         response.send(tutorArray[pathEnd]);
     }
 
