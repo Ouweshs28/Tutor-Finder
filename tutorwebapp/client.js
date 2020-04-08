@@ -27,8 +27,9 @@ function init() {
     tutorPage = document.getElementById("tutors");
     tutorDiv = document.getElementById("tutors");
     reviewTutorDiv = document.getElementById("tutorReview");
-    loadHome();
     CheckSession();
+    loadHome();
+
 }
 
 function loadHome() {
@@ -132,7 +133,7 @@ function loadTutors(num) {
 
 function CheckSession() {
     let signedIn = false;
-    if (localStorage.usrName != undefined) {
+    if (localStorage.student != undefined ||localStorage.tutor != undefined ) {
         signedIn = true;
         document.getElementById("userSignedIn").style.display="block";
         let element = document.getElementById("loginButton");
@@ -140,15 +141,17 @@ function CheckSession() {
     }
     else{
         document.getElementById("userSignedIn").style.display="none";
+        let element = document.getElementById("loginButton");
+        element.classList.remove("disabled");
     }
 
 }
 
 function Logout() {
-    localStorage.removeItem('usrName');
+    localStorage.clear();
     toastr.success("Successfully logged out");
+    setTimeout(loadHome,1000);
     CheckSession();
-    setTimeout(loadHome,1000)
 
 }
 
@@ -267,7 +270,6 @@ function loadReviewDB(tutorID) {
 function addReview(id) {
     //Set up XMLHttpRequest
     let xhttp = new XMLHttpRequest();
-    console.log("add review performed")
 
     //Extract user data
     let tutorid = id;
@@ -332,8 +334,9 @@ function loginStudent() {
 
             if (xhttp.responseText == "success") {
                 toastr.success("login successful");
-                localStorage.usrName = usrName;//Store name
+                localStorage.student = usrName;//Store name
                 setTimeout(loadHome,2000)
+                CheckSession();
 
             } else {
                 toastr.warning("Incorrect username/password");
@@ -370,10 +373,9 @@ function loginTutor() {
 
             if (xhttp.responseText == "success") {
                 toastr.success("login successful");
-                localStorage.usrName = usrName;//Store name
-                CheckSession();
+                localStorage.tutor = usrName;//Store name
                 setTimeout(loadHome,2000)
-
+                CheckSession();
             } else {
                 toastr.warning("Incorrect username/password");
 
