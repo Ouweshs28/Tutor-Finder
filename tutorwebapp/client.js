@@ -112,7 +112,7 @@ function loadAddTutorReview() {
 
 }
 
-function loadTutors() {
+function loadTutors(num) {
     homePage.style.display = "none";
     loginTutorPage.style.display = "none";
     loginStudentPage.style.display = "none";
@@ -121,44 +121,61 @@ function loadTutors() {
     tutorReviewPage.style.display = "none";
     addReviewPage.style.display = "none";
     tutorPage.style.display = "block";
-    loadTutorsDB();
+    let grade=num;
+    loadTutorsDB(grade);
+}
+
+function displayTutor(usrArr,grade){
+    let str;
+
+    if(grade==1){
+        str='7-9'
+    }else if(grade==2){
+        str='10-11';
+    }else if(grade==3){
+        str='12-13';
+    }
+
+    //Return if tutors
+    if (usrArr.length === 0)
+        return;
+
+
+    //Build string with user data
+    let htmlStr = '<div class="card mb-3 row justify-content-center cardTutor">';
+    for (let key in usrArr) {
+        if (usrArr[key].grade == str) {
+            htmlStr += ('<div class="card-body allTutorCards">');
+            htmlStr += ('<h5 class="card-title text-center">' + usrArr[key].name + '</h5>');
+            htmlStr += (' <p class="card-text tutorText">Subjects: ' + usrArr[key].subject + '</p>');
+            htmlStr += (' <p class="card-text tutorText">Qualification: ' + usrArr[key].qualification + '</p>');
+            htmlStr += (' <p class="card-text tutorText">Region: ' + usrArr[key].region + '</p>');
+            htmlStr += (' <p class="card-text tutorText">Address: ' + usrArr[key].address + '</p>');
+            htmlStr += (' <p class="card-text tutorText">Phone Number: ' + usrArr[key].phonenum + '</p>');
+            htmlStr += (' <p class="card-text tutorText">Email: ' + usrArr[key].email + '</p>');
+            htmlStr += ('<div class="tutorButton">');
+            htmlStr += ('<a class="btn btn-primary" onclick="loadAddTutorReview(\'' + usrArr[key].tutorID + '\')">Add Reviews</a>');
+            htmlStr += ('<a class="btn btn-primary" onclick="loadTutorReview(\'' + usrArr[key].tutorID + '\')">Reviews</a>');
+            htmlStr += ('</div>');
+            htmlStr += (' </div>');
+        }
+    }
+    //Add users to page.
+    htmlStr += "</div>" +
+        "</div>";
+    tutorDiv.innerHTML = htmlStr;
+
 }
 
 /* Loads current users and adds them to the page. */
-function loadTutorsDB() {
+function loadTutorsDB(grade) {
     //Set up XMLHttpRequest
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = () => {//Called when data returns from server
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             //Convert JSON to a JavaScript object
             usrArr = JSON.parse(xhttp.responseText);
-
-
-            //Return if tutors
-            if (usrArr.length === 0)
-                return;
-
-            //Build string with user data
-            let htmlStr = '<div class="card mb-3 row justify-content-center cardTutor">';
-            for (let key in usrArr) {
-                htmlStr += ('<div class="card-body allTutorCards">');
-                htmlStr += ('<h5 class="card-title text-center">' + usrArr[key].name + '</h5>');
-                htmlStr += (' <p class="card-text tutorText">Subjects: ' + usrArr[key].subject + '</p>');
-                htmlStr += (' <p class="card-text tutorText">Qualification: ' + usrArr[key].qualification + '</p>');
-                htmlStr += (' <p class="card-text tutorText">Region: ' + usrArr[key].region + '</p>');
-                htmlStr += (' <p class="card-text tutorText">Address: ' + usrArr[key].address + '</p>');
-                htmlStr += (' <p class="card-text tutorText">Phone Number: ' + usrArr[key].phonenum + '</p>');
-                htmlStr += (' <p class="card-text tutorText">Email: ' + usrArr[key].email + '</p>');
-                htmlStr += ('<div class="tutorButton">');
-                htmlStr += ('<a class="btn btn-primary" onclick="loadAddTutorReview(\'' + usrArr[key].tutorID + '\')">Add Reviews</a>');
-                htmlStr += ('<a class="btn btn-primary" onclick="loadTutorReview(\'' + usrArr[key].tutorID + '\')">Reviews</a>');
-                htmlStr += ('</div>');
-                htmlStr += (' </div>');
-            }
-            //Add users to page.
-            htmlStr += "</div>" +
-                "</div>";
-            tutorDiv.innerHTML = htmlStr;
+            displayTutor(usrArr,grade)
         }
     };
 
@@ -198,7 +215,7 @@ function loadReviewDB(tutorID) {
             }
 
             for (let key in ReviewArr) {
-                htmlStr += ('<div class="card-body justify-content-center cardTutor">');
+                htmlStr += ('<div class="card-body">');
                 htmlStr += ('<div class="card">');
                 htmlStr += (' <div class="card-body">');
                 htmlStr += (' <h5 class="card-title">'+ReviewArr[key].username+'</h5>');
