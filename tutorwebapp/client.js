@@ -179,15 +179,159 @@ function Logout() {
 }
 
 function checkUser() {
+    let key=localStorage.key(0);
+    let name=localStorage.getItem(key);
     if(localStorage.key(0)=="student"){
-        let key=localStorage.key(0);
-        let name=localStorage.getItem(key);
         getMyStudent(name)
 
     }else {
+        getMyTutor(name);
 
     }
 
+}
+
+function getMyTutor(name){
+    loadMyStudent();
+
+    //Set up XMLHttpRequest
+    let xhttp = new XMLHttpRequest();
+
+    let tutor={
+        username:name
+    };
+    xhttp.onreadystatechange = () => {//Called when data returns from server
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            //Convert JSON to a JavaScript object
+            let usrArr = JSON.parse(xhttp.responseText);
+            console.log(usrArr);
+
+            //Return if no users
+            if(usrArr.length === 0)
+                return;
+
+            //Build string with user data
+
+            let htmlStr = '<h2>My Account</h2>';
+            for(let key in usrArr){
+                htmlStr += ('<div class="form-group">');
+                htmlStr += ('<input type="text" class="form-control" name="name" id="updatenameT" value="'+usrArr[key].name+'"disabled>');
+                htmlStr += ('</div>');
+                htmlStr += ('<div class="form-group">');
+                htmlStr += ('<input type="text" class="form-control" name="username" id="updateusernameT" value="'+usrArr[key].username+'"disabled>');
+                htmlStr += ('</div>');
+                htmlStr += ('<div class="form-group">');
+                htmlStr += ('<input type="email" class="form-control" name="email" id="updateemailT" placeholder="Email" value="'+usrArr[key].email+'">');
+                htmlStr += ('</div>');
+                htmlStr += ('<div class="form-group">');
+                htmlStr += ('<input type="password" class="form-control" name="password" id="updatepassT" placeholder="Password" required="required">');
+                htmlStr += ('</div>');
+                htmlStr += ('<div class="form-group">');
+                htmlStr += ('<input type="text" class="form-control" name="quatification" id="updatequalification" placeholder="quatification" required="required" value="'+usrArr[key].qualification+'">');
+                htmlStr += ('</div>');
+                htmlStr += ('<div class="form-group">');
+                htmlStr += ('<input type="text" class="form-control" name="address" id="updateaddress" placeholder="Address" required="required" value="'+usrArr[key].address+'">');
+                htmlStr += ('</div>');
+                htmlStr += ('<div class="form-group">');
+                htmlStr += ('<p class="selectOption">Region :  </p>');
+                htmlStr += ('<label>' +
+                    '                <select id="regionupdate" class="custom-select">Region' +
+                    '                    <option value="1">North</option>' +
+                    '                    <option value="2">East</option>' +
+                    '                    <option value="3">South</option>' +
+                    '                    <option value="4">West</option>' +
+                    '                    <option value="5">Center</option>' +
+                    '                </select>' +
+                    '            </label>' +
+                    '        </div>' +
+                    '        <div class="form-group">' +
+                    '            <p class="selectOption">Grade:  </p>' +
+                    '            <label>' +
+                    '                <select class="custom-select" id="gradeupdate">' +
+                    '                    <option value="1">7-9</option>' +
+                    '                    <option value="2">10-11</option>' +
+                    '                    <option value="3">12-13</option>' +
+                    '                </select>' +
+                    '            </label>' +
+                    '        </div>');
+                htmlStr += ('<div class="form-group">');
+                htmlStr += ('<input type="text" class="form-control" name="subjects" placeholder="Subjects" id="updatesubjects" value="'+usrArr[key].subject+'">');
+                htmlStr += ('</div>');
+                htmlStr += ('<div class="form-group">');
+                htmlStr += ('<input type="text" class="form-control" name="phone" placeholder="Phone" id="updatephone" value="'+usrArr[key].phonenum+'">');
+                htmlStr += ('</div>');
+            }
+            htmlStr += ('<div class="form-group">');
+            htmlStr += ('<button onclick="PerformUpdateTutor()" class="btn btn-primary btn-block btn-lg">Update</button>');
+            htmlStr += ('</div>');
+            htmlStr += ('<div class="form-group">');
+            htmlStr += ('<button onclick="loadHome()" class="btn-danger btn-block btn-lg">Cancel</button>');
+            htmlStr += ('</div>');
+            htmlStr += "</div>";
+            updateStudentPage.innerHTML = htmlStr;
+        }
+    };
+
+    //Request data from all users
+    xhttp.open("POST", "/tutorinfo", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(tutor));
+}
+
+function PerformUpdateTutor() {
+    //Set up XMLHttpRequest
+    let xhttp = new XMLHttpRequest();
+
+    //Extract user data
+    let usrName = document.getElementById("updatenameT").value;
+    let usrUsername = document.getElementById("updateusernameT").value;
+    let usrEmail = document.getElementById("updateemailT").value;
+    let usrPass = document.getElementById("updatepassT").value;
+    let usrQualification = document.getElementById("updatequalification").value;
+    let usrAddress = document.getElementById("updateaddress").value;
+    let e = document.getElementById("regionupdate");
+    let usrRegion = e.options[e.selectedIndex].text;
+    let f = document.getElementById("gradeupdate");
+    let usrGrade = f.options[e.selectedIndex].text;
+    let usrSubjects = document.getElementById("updatesubjects").value;
+    let usrPhone = document.getElementById("updatephone").value;
+
+    //Create object with user data
+    let tutor = {
+        name: usrName,
+        username: usrUsername,
+        email: usrEmail,
+        pass: usrPass,
+        qualification: usrQualification,
+        address: usrAddress,
+        region: usrRegion,
+        class: usrGrade,
+        subjects: usrSubjects,
+        phone: usrPhone
+    };
+
+    console.log(tutor);
+
+    //Set up function that is called when reply received from server
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+
+            if (xhttp.responseText == "success") {
+                toastr.success("Info successfully updated");
+                setTimeout(loadHome,2000)
+
+            } else {
+                toastr.warning("error try again");
+
+            }
+        } else {
+        }
+    };
+
+    //Send new user data to server
+    xhttp.open("POST", "/updatetutorinfo", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(tutor));
 }
 
 function getMyStudent(name){
