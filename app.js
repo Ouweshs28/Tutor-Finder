@@ -195,6 +195,29 @@ function RegTutorPost(request, response){
     response.send("success");
 }
 
+function AddReviewPost(request, response){
+    //Output the data sent to the server
+    let review = request.body;
+    console.log("Data received: " + JSON.stringify(review));
+
+
+    //Build query
+    let sql = "INSERT INTO Review VALUES" +
+        "('"+review.username+"',"+review.id+",'"+review.rating+"','"+review.comment+"');";
+
+//Execute query and output results
+    connectionPool.query(sql, (err, result) => {
+        if (err){//Check for errors
+            console.error("Error executing query: " + JSON.stringify(err));
+        }
+        else{
+            console.log("success");
+        }
+    });
+    //Finish off the interaction.
+    response.send("success");
+}
+
 
 /* Returns a promise to get tutors. */
 async function getTutors(){
@@ -256,6 +279,7 @@ app.post('/logintutor', LoginTutorPost);//Performs login student
 app.post('/loginstudent', LoginStudentPost);//Performs login student
 app.post('/registerstudent', RegStudentPost);//Adds a new student user
 app.post('/registertutor', RegTutorPost);//Adds a new tutor user
+app.post('/addreview', AddReviewPost);//Adds a review
 app.post('/reviewstutor', ReviewTutorPost);// Searches for corresponding reviews and displays it
 
 app.listen(9000);

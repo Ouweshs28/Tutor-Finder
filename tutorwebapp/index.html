@@ -222,7 +222,6 @@
                 <h5 class="card-title">Username</h5>
                 <p class="card-text">Rating: </p>
                 <p class="card-text">Comments: </p>
-                <p class="card-text"><small class="text-muted">Last updated: date</small></p>
             </div>
         </div>
         <div class="backButton">
@@ -231,11 +230,11 @@
     </div>
 </div>
 <div class="login" id="addReview">
-    <h2 class="text-center">Tutor Name</h2>
+    <h2 class="text-center" id="tutorTitle"></h2>
     <div class="form-group">
         <p class="selectOption">Rating:  </p>
         <label>
-            <select class="custom-select">
+            <select class="custom-select" id="rating">
                 <option value="1">Not recommended</option>
                 <option value="2">Average</option>
                 <option value="3">Good</option>
@@ -248,10 +247,10 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
     <div class="form-group">
-        <button class="btn btn-primary btn-block">Add Review</button>
+        <button class="btn btn-primary btn-block" id="addreviewBtn">Add Review</button>
     </div>
     <div class="form-group">
-        <button class="btn btn-danger btn-block" onclick="loadTutors()">Cancel</button>
+        <button class="btn btn-danger btn-block" onclick="loadHome()">Cancel</button>
     </div>
 </div>
 </body>

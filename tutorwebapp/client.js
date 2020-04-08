@@ -1,7 +1,7 @@
 //Points to a div element where user combo will be inserted.
 let tutorDiv;
 let reviewTutorDiv;
-let addUserResultDiv;
+let TutorAddTitle;
 let homePage = document;
 let loginStudentPage;
 let loginTutorPage = document;
@@ -101,7 +101,7 @@ function loadTutorReview(tutorID) {
 
 }
 
-function loadAddTutorReview() {
+function loadAddTutorReview(name,id) {
     homePage.style.display = "none";
     loginTutorPage.style.display = "none";
     loginStudentPage.style.display = "none";
@@ -110,6 +110,10 @@ function loadAddTutorReview() {
     tutorReviewPage.style.display = "none";
     addReviewPage.style.display = "block";
     tutorPage.style.display = "none";
+    TutorAddTitle=document.getElementById("tutorTitle").innerText=name;
+    document.getElementById("addreviewBtn").onclick = function() { addReview(id); };
+
+
 
 }
 
@@ -178,7 +182,7 @@ function displayTutor(usrArr,grade){
             htmlStr += (' <p class="card-text tutorText">Phone Number: ' + usrArr[key].phonenum + '</p>');
             htmlStr += (' <p class="card-text tutorText">Email: ' + usrArr[key].email + '</p>');
             htmlStr += ('<div class="tutorButton">');
-            htmlStr += ('<a class="btn btn-primary" onclick="loadAddTutorReview(\'' + usrArr[key].tutorID + '\')">Add Reviews</a>');
+            htmlStr += ('<a class="btn btn-primary" onclick="loadAddTutorReview(\'' + usrArr[key].name + '\',\'' + usrArr[key].tutorID + '\')">Add Reviews</a>');
             htmlStr += ('<a class="btn btn-primary" onclick="loadTutorReview(\'' + usrArr[key].tutorID + '\')">Reviews</a>');
             htmlStr += ('</div>');
             htmlStr += (' </div>');
@@ -249,12 +253,7 @@ function loadReviewDB(tutorID) {
                 htmlStr += (' </div>');
 
             }
-            //Add users to page.
-            htmlStr += '<div class="backButton">\n' +
-                '            <button class="btn btn-primary btn-lg btn-block" onclick="loadTutors()">Back</button>\n' +
-                '        </div>\n' +
-                '    </div>\n' +
-                '</div>';
+
             reviewTutorDiv.innerHTML = htmlStr;
         }
 
@@ -262,6 +261,54 @@ function loadReviewDB(tutorID) {
     xhttp.open("POST", "/reviewstutor", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify(tutor));
+}
+
+/* Posts login student. */
+function addReview(id) {
+    //Set up XMLHttpRequest
+    let xhttp = new XMLHttpRequest();
+    console.log("add review performed")
+
+    //Extract user data
+    let tutorid = id;
+    let username=localStorage.getItem("usrName");
+    let comments = document.getElementById("exampleFormControlTextarea1").value;
+    let e = document.getElementById("rating");
+    let rating = e.options[e.selectedIndex].text;
+
+    if(username===null){
+        toastr.warning("please sign in first");
+        return;
+    }
+
+    //Create object with user data
+    let review = {
+        username:username,
+        id: tutorid,
+        rating: rating,
+        comment:comments
+    };
+
+    //Set up function that is called when reply received from server
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+
+            if (xhttp.responseText == "success") {
+                toastr.success("review added");
+                setTimeout(loadHome,2000)
+
+            } else {
+                toastr.warning("error try again");
+
+            }
+        } else {
+        }
+    };
+
+    //Send new user data to server
+    xhttp.open("POST", "/addreview", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify(review));
 }
 
 /* Posts login student. */
