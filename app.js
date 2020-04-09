@@ -27,8 +27,8 @@ app.use('/', express.static(__dirname + '/www')); // redirect root
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); // redirect bootstrap JS
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist')); // redirect JS jQuery
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css')); // redirect CSS bootstrap
-app.use('/js', express.static(__dirname + '/node_modules/toastr')); // redirect CSS bootstrap
-app.use('/css', express.static(__dirname + '/node_modules/toastr/build')); // redirect CSS bootstrap
+app.use('/js', express.static(__dirname + '/node_modules/toastr')); // redirect CSS toaster
+app.use('/css', express.static(__dirname + '/node_modules/toastr/build')); // redirect CSS toaster
 
 async function getTutorReviews(id) {
     //Build query
@@ -143,7 +143,7 @@ function LoginStudentPost(request, response) {
         studentArray = (JSON.stringify(result));
         //Empty array
         if (studentArray.length === 2) {
-            response.send("error");
+            response.send("invalid");
         } else {
             response.send("success");
         }
@@ -182,7 +182,7 @@ function LoginTutorPost(request, response) {
         tutorLogin = (JSON.stringify(result));
         //Empty array
         if (tutorLogin.length === 2) {
-            response.send("error");
+            response.send("invalid");
         } else {
             response.send("success");
         }
@@ -226,8 +226,11 @@ function RegStudentPost(request, response) {
     connectionPool.query(sql, (err, result) => {
         if (err) {//Check for errors
             console.error("Error executing query: " + JSON.stringify(err));
+            response.send("error");
         } else {
             console.log("success");
+            response.send("success");
+
         }
     });
     //Finish off the interaction.
@@ -248,8 +251,11 @@ function UpdateStudentPost(request, response) {
     connectionPool.query(sql, (err, result) => {
         if (err) {//Check for errors
             console.error("Error executing query: " + JSON.stringify(err));
+            console.log("error");
+            response.send("error");
         } else {
             console.log("success");
+            response.send("success");
             console.log(result.affectedRows + ' rows updated');
         }
     });
@@ -271,13 +277,13 @@ function UpdateTutorPost(request, response) {
     connectionPool.query(sql, (err, result) => {
         if (err) {//Check for errors
             console.error("Error executing query: " + JSON.stringify(err));
+            response.send("error");
         } else {
             console.log("success");
             console.log(result.affectedRows + ' rows updated');
+            response.send("success");
         }
     });
-    //Finish off the interaction.
-    response.send("success");
 }
 
 function RegTutorPost(request, response) {
@@ -296,8 +302,11 @@ function RegTutorPost(request, response) {
     connectionPool.query(sql, (err, result) => {
         if (err) {//Check for errors
             console.error("Error executing query: " + JSON.stringify(err));
+            console.log("error");
+            response.send("error");
         } else {
             console.log("success");
+            response.send("success");
         }
     });
     //Finish off the interaction.
@@ -317,6 +326,8 @@ function AddReviewPost(request, response) {
     connectionPool.query(sql, (err, result) => {
         if (err) {//Check for errors
             console.error("Error executing query: " + JSON.stringify(err));
+            response.send("error");
+
         } else {
             console.log("success");
         }

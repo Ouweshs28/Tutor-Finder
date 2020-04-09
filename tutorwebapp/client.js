@@ -728,7 +728,7 @@ function registerTutor() {
 
     //Extract user data
     let usrName = document.getElementsByName("name")[0].value;
-    let usrUsername = document.getElementsByName("username")[0].value;
+    let usrUsername = document.getElementsByName("username")[1].value;
     let usrEmail = document.getElementsByName("email")[1].value;
     let usrPass = document.getElementsByName("password")[1].value;
     let usrQualification = document.getElementsByName("qualification")[0].value;
@@ -741,7 +741,7 @@ function registerTutor() {
     let usrPhone = document.getElementsByName("phone")[0].value;
 
     if (usrUsername == "" || usrName == "" || usrPass == "" || usrEmail == "" || usrQualification == "" || usrSubjects == "" || usrAddress == "" || usrPhone == "") {
-        toastr.warning("Fill up all fields")
+        toastr.warning("Fill up all fields");
         return;
     }
 

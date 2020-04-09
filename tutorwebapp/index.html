@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Web Tutor App</title>
     <link href="style.css" type="text/css" rel="stylesheet">
     <script src="client.js"></script>
+    <meta charset="UTF-8">
 </head>
 <body>
 <script src="/js/jquery.min.js"></script>
@@ -28,14 +29,11 @@
                 </div>
                 <div class="col-9">
                     <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
-                             aria-labelledby="v-pills-home-tab">...
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel">
                         </div>
-                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
-                             aria-labelledby="v-pills-profile-tab">...
+                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel">
                         </div>
-                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
-                             aria-labelledby="v-pills-messages-tab">...
+                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel">
                         </div>
                     </div>
                 </div>
@@ -47,20 +45,18 @@
                 aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <li class="navbar-brand" id="navIcon">
-            <a class="navbar-brand" onclick="loadHome()">Home Page
-                <img src="images/logo.png" width="30" height="30" alt="">
-            </a>
-        </li>
-        <li class="nav-item dropdown" id="userSignedIn">
+        <a class="navbar-brand" id="navIcon" onclick="loadHome()">Home Page
+            <img src="images/logo.png" width="30" height="30" alt="usericon">
+        </a>
+        <div class="nav-item dropdown" id="userSignedIn">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
-                <img src="images/user.png"></a>
+                <img src="images/user.png" alt="usericon"></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" onclick="checkUser()">My Account</a>
                 <a class="dropdown-item" onclick="Logout()">Logout</a>
             </div>
-        </li>
+        </div>
     </nav>
 </div>
 <div id="home">
@@ -68,7 +64,8 @@
         <img src="images/main.jpg" class="card-img-top" alt="..." style="height: 60vh">
         <div class="card-body">
             <h5 class="card-title">Welcome to WebTutor</h5>
-            <p class="card-text">This website allows students to find tutors for their respective classes and rate them accordingly. It also allows tutors to register so that they can find more students.</p>
+            <p class="card-text">This website allows students to find tutors for their respective classes and rate them
+                accordingly. It also allows tutors to register so that they can find more students.</p>
             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
         </div>
     </div>
@@ -99,7 +96,7 @@
     <h2 class="text-center">Sign In Tutor</h2>
     <h5 class="text-center">Need an account click on the links below</h5>
     <p class="text-center" onclick="loadStudentReg()">a student?</p>
-    <p class="text-center"onclick="loadTutorReg()">a tutor?</p>
+    <p class="text-center" onclick="loadTutorReg()">a tutor?</p>
     <div class="form-group">
         <input type="text" class="form-control" placeholder="Username" required="required" id="tutoruser">
     </div>
@@ -114,7 +111,7 @@
     <div>
         <h2>Sign Up (Student)</h2>
         <p class="text-center">Already have an account? <a onclick="loadStudentLogin()">Sign in Student</a></p>
-        <h4>A tutor? Sign Up  <a onclick="loadTutorReg()">Tutor Sign Up</a></h4>
+        <h4>A tutor? Sign Up <a onclick="loadTutorReg()">Tutor Sign Up</a></h4>
         <hr>
         <div class="form-group">
             <input type="text" class="form-control" name="username" placeholder="Username" required="required">
@@ -133,8 +130,8 @@
 <div class="signup-form" id="tutorSignUp">
     <div>
         <h2>Sign Up (Tutor)</h2>
-        <p class="text-center">Already have an account?  <a onclick="loadTutorLogin()">Sign in Tutor</a></p>
-        <h4>A student? Sign Up  <a onclick="loadStudentReg()">Student Sign Up</a></h4>
+        <p class="text-center">Already have an account? <a onclick="loadTutorLogin()">Sign in Tutor</a></p>
+        <h4>A student? Sign Up <a onclick="loadStudentReg()">Student Sign Up</a></h4>
         <hr>
         <div class="form-group">
             <input type="text" class="form-control" name="name" placeholder="Name" required="required">
@@ -149,15 +146,16 @@
             <input type="password" class="form-control" name="password" placeholder="Password" required="required">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="qualification" placeholder="Qualification" required="required">
+            <input type="text" class="form-control" name="qualification" placeholder="Qualification"
+                   required="required">
         </div>
         <div class="form-group">
             <input type="text" class="form-control" name="address" placeholder="Address" required="required">
         </div>
         <div class="form-group">
-            <p class="selectOption">Region :  </p>
+            <p class="selectOption">Region : </p>
             <label>
-                <select id="region" class="custom-select">Region
+                <select id="region" class="custom-select">
                     <option value="1">North</option>
                     <option value="2">East</option>
                     <option value="3">South</option>
@@ -167,7 +165,7 @@
             </label>
         </div>
         <div class="form-group">
-            <p class="selectOption">Grade:  </p>
+            <p class="selectOption">Grade: </p>
             <label>
                 <select class="custom-select" id="grade">
                     <option value="1">7-9</option>
@@ -188,20 +186,20 @@
     </div>
 </div>
 <div id="tutors">
-<div class="card mb-3 row justify-content-center cardTutor">
-    <div class="card-body">
-        <h5 class="card-title text-center">Tutor Name</h5>
-        <p class="card-text tutorText">Qualification: </p>
-        <p class="card-text tutorText">Region: </p>
-        <p class="card-text tutorText">Address:</p>
-        <p class="card-text tutorText">Phone Number:</p>
-        <p class="card-text tutorText">Email: </p>
-        <div class="tutorButton">
-        <a class="btn btn-primary" onclick="loadAddTutorReview()">Add Reviews</a>
-        <a class="btn btn-primary" onclick="loadTutorReview()">Reviews</a>
+    <div class="card mb-3 row justify-content-center cardTutor">
+        <div class="card-body">
+            <h5 class="card-title text-center">Tutor Name</h5>
+            <p class="card-text tutorText">Qualification: </p>
+            <p class="card-text tutorText">Region: </p>
+            <p class="card-text tutorText">Address:</p>
+            <p class="card-text tutorText">Phone Number:</p>
+            <p class="card-text tutorText">Email: </p>
+            <div class="tutorButton">
+                <a class="btn btn-primary" onclick="loadAddTutorReview()">Add Reviews</a>
+                <a class="btn btn-primary" onclick="loadTutorReview()">Reviews</a>
+            </div>
         </div>
     </div>
-</div>
 </div>
 <div id="tutorReview">
     <div class="card mb-3 row justify-content-center cardTutor">
@@ -229,9 +227,9 @@
     </div>
 </div>
 <div class="login" id="addReview">
-    <h2 class="text-center" id="tutorTitle"></h2>
+    <h2 class="text-center" id="tutorTitle">Tutor Name</h2>
     <div class="form-group">
-        <p class="selectOption">Rating:  </p>
+        <p class="selectOption">Rating: </p>
         <label>
             <select class="custom-select" id="rating">
                 <option value="1">Not recommended</option>
