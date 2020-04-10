@@ -1,0 +1,174 @@
+{
+  "id": "b07007b1-d44e-4cd7-bf6b-d95b530d3dd9",
+  "version": "2.0",
+  "name": "ValidationStudentRegister",
+  "url": "http://localhost:9000",
+  "tests": [{
+    "id": "cec4cfbe-56ba-4ab6-839c-e9768093b047",
+    "name": "RegisterStudent",
+    "commands": [{
+      "id": "87323551-4b5c-488e-936f-b33bb11e92a0",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d9f63ece-685b-420d-8007-30fbb417b500",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x880",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c5ede1d6-8598-4d3a-8c4f-1dd788321e55",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Sign Up",
+      "targets": [
+        ["linkText=Sign Up", "linkText"],
+        ["css=.btn-danger:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign Up')]", "xpath:link"],
+        ["xpath=//a[@onclick='loadStudentReg()']", "xpath:attributes"],
+        ["xpath=//div[@id='home']/div[2]/div/a[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div/a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Sign Up')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f8e43f36-866a-43d8-be39-d805d7a3ab94",
+      "comment": "",
+      "command": "click",
+      "target": "name=username",
+      "targets": [
+        ["name=username", "name"],
+        ["css=#studentSignUp .form-group:nth-child(5) > .form-control", "css:finder"],
+        ["xpath=//input[@name='username']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "73055a41-59a4-4b9e-95dc-88a649295f38",
+      "comment": "",
+      "command": "type",
+      "target": "name=username",
+      "targets": [
+        ["name=username", "name"],
+        ["css=#studentSignUp .form-group:nth-child(5) > .form-control", "css:finder"],
+        ["xpath=//input[@name='username']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ec5de50f-a91b-466d-bef8-991ba1507745",
+      "comment": "",
+      "command": "click",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=#studentSignUp .form-group:nth-child(6) > .form-control", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0c6141da-1859-4452-b077-c497ff267665",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=#studentSignUp .form-group:nth-child(6) > .form-control", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c630c490-bad3-493d-989b-974fedcf5d04",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=#studentSignUp .form-group:nth-child(7) > .form-control", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6e10dc45-b7b7-46f1-942b-cc7e2b2568aa",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=#studentSignUp .form-group:nth-child(7) > .form-control", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8bd0aabc-77cb-4485-b061-4dee90d7bf18",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-group:nth-child(8) > .btn",
+      "targets": [
+        ["css=.form-group:nth-child(8) > .btn", "css:finder"],
+        ["xpath=//button[@onclick='registerStudent()']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div[4]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign Up')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0fce2f11-6f43-492d-93a1-79ee8b0c076c",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.form-group:nth-child(8) > .btn",
+      "targets": [
+        ["css=.form-group:nth-child(8) > .btn", "css:finder"],
+        ["xpath=//button[@onclick='registerStudent()']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div[4]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign Up')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "92e20901-8788-447e-a8f1-d3a2e885ab37",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.form-group:nth-child(8) > .btn",
+      "targets": [
+        ["css=.form-group:nth-child(8) > .btn", "css:finder"],
+        ["xpath=//button[@onclick='registerStudent()']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div[4]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign Up')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2248abef-ee5d-4317-ae71-fc5b06b27910",
+      "comment": "If all fields are not filled up, the page will not redirect to the login page",
+      "command": "assertText",
+      "target": "css=.form-group:nth-child(8) > .btn",
+      "targets": [],
+      "value": "Sign Up"
+    }]
+  }],
+  "suites": [{
+    "id": "cded375e-50ea-4612-9f44-ac33e70e8c4e",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["cec4cfbe-56ba-4ab6-839c-e9768093b047"]
+  }],
+  "urls": ["http://localhost:9000/"],
+  "plugins": []
+}

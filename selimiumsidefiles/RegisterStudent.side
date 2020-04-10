@@ -1,0 +1,154 @@
+{
+  "id": "7136fd80-1e6b-4886-b02b-2bb3429efbac",
+  "version": "2.0",
+  "name": "RegisterStudent",
+  "url": "http://localhost:9000",
+  "tests": [{
+    "id": "41cb0c96-2e23-4fd9-849c-0118ee26a4be",
+    "name": "RegisterStudent",
+    "commands": [{
+      "id": "0eb103f0-031c-4420-b3a4-cb61ffc363f7",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "87d3987e-59c0-4b58-ba42-528da5f858ed",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x880",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "05652e3e-c5a5-4ec8-b56d-32c70ebb72ca",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Sign Up",
+      "targets": [
+        ["linkText=Sign Up", "linkText"],
+        ["css=.btn-danger:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Sign Up')]", "xpath:link"],
+        ["xpath=//a[@onclick='loadStudentReg()']", "xpath:attributes"],
+        ["xpath=//div[@id='home']/div[2]/div/a[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div/a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Sign Up')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ee118f76-5586-4f05-91d8-974683085574",
+      "comment": "",
+      "command": "click",
+      "target": "name=username",
+      "targets": [
+        ["name=username", "name"],
+        ["css=#studentSignUp .form-group:nth-child(5) > .form-control", "css:finder"],
+        ["xpath=//input[@name='username']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c8ae1ae0-7b1d-45a2-ab47-3e7a9cf05186",
+      "comment": "",
+      "command": "type",
+      "target": "name=username",
+      "targets": [
+        ["name=username", "name"],
+        ["css=#studentSignUp .form-group:nth-child(5) > .form-control", "css:finder"],
+        ["xpath=//input[@name='username']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/input", "xpath:position"]
+      ],
+      "value": "Shaad28"
+    }, {
+      "id": "5725cb44-2586-4cc7-aa68-2de9a2970f1f",
+      "comment": "",
+      "command": "click",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=#studentSignUp .form-group:nth-child(6) > .form-control", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bd0e53f0-74e8-493e-b8d8-b4162a4c02e0",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=#studentSignUp .form-group:nth-child(6) > .form-control", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div[2]/input", "xpath:position"]
+      ],
+      "value": "player_shaad28@hotmail.com"
+    }, {
+      "id": "6820a82a-faa0-4b15-bb36-ff4e15349154",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=#studentSignUp .form-group:nth-child(7) > .form-control", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "58dc30d8-60cf-4557-979c-f00e9e1845f4",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=#studentSignUp .form-group:nth-child(7) > .form-control", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "shaad28"
+    }, {
+      "id": "a9693f7e-bde2-466b-9ca3-1954d1ff7c05",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-group:nth-child(8) > .btn",
+      "targets": [
+        ["css=.form-group:nth-child(8) > .btn", "css:finder"],
+        ["xpath=//button[@onclick='registerStudent()']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignUp']/div/div[4]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign Up')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "35b8d51f-8eef-4259-99f5-a5dc00930bff",
+      "comment": "If correct details are entered , it will redirect to the login pagge",
+      "command": "assertElementPresent",
+      "target": "css=#studentSignIn .btn",
+      "targets": [
+        ["css=#studentSignIn .btn", "css:finder"],
+        ["xpath=//button[@onclick='loginStudent()']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign in')]", "xpath:innerText"]
+      ],
+      "value": "Sign in"
+    }]
+  }],
+  "suites": [{
+    "id": "1be8d289-651e-4f20-9e8d-d843ab79f402",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["41cb0c96-2e23-4fd9-849c-0118ee26a4be"]
+  }],
+  "urls": ["http://localhost:9000/"],
+  "plugins": []
+}

@@ -544,15 +544,23 @@ function addReview(id) {
 
     //Extract user data
     let tutorid = id;
-    let username = localStorage.getItem("usrName");
+    let key=localStorage.key(0);
+    let username = localStorage.getItem("student");
     let comments = document.getElementById("exampleFormControlTextarea1").value;
     let e = document.getElementById("rating");
     let rating = e.options[e.selectedIndex].text;
 
-    if (username === null) {
+    if (username == null &&  key!="tutor") {
         toastr.warning("please sign in first");
         return;
     }
+
+    if (key == "tutor") {
+        toastr.error("Tutors are not allowed to add reviews");
+        return;
+    }
+
+    if(localStorage.key(0)=="")
 
     if (comments == "") {
         toastr.warning("Please fill up all  the fields");
@@ -661,7 +669,7 @@ function loginTutor() {
             if (xhttp.responseText == "success") {
                 toastr.success("login successful");
                 localStorage.tutor = usrName;//Store name
-                setTimeout(loadHome, 2000)
+                setTimeout(loadHome, 2000);
                 CheckSession();
             } else {
                 toastr.warning("Incorrect username/password");

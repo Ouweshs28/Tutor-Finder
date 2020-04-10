@@ -1,0 +1,164 @@
+{
+  "id": "fa50f95d-27ac-451f-8a2f-f6089abb6a63",
+  "version": "2.0",
+  "name": "LoginSuccess",
+  "url": "http://localhost:9000",
+  "tests": [{
+    "id": "4f125eb1-df63-4bbc-be8d-49dfc6c65363",
+    "name": "LoginSuccess",
+    "commands": [{
+      "id": "b13453b7-df4e-4120-9dc4-056378dabc6e",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f30dee28-a4fd-4689-a807-2cf8b9298e7b",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x880",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6ee18f8e-1ffb-4ce4-b036-510e6b17847f",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "69e6e8e4-3a91-4111-9f7a-63cdb6871803",
+      "comment": "",
+      "command": "click",
+      "target": "id=loginButton",
+      "targets": [
+        ["id=loginButton", "id"],
+        ["linkText=Login", "linkText"],
+        ["css=#loginButton", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[@id='loginButton']", "xpath:attributes"],
+        ["xpath=//div[@id='home']/div[2]/div/a", "xpath:idRelative"],
+        ["xpath=//div[2]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a414f952-3f73-41d0-861f-34df4d3d0b91",
+      "comment": "",
+      "command": "click",
+      "target": "id=studentUsername",
+      "targets": [
+        ["id=studentUsername", "id"],
+        ["css=#studentUsername", "css:finder"],
+        ["xpath=//input[@id='studentUsername']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e08f725b-d784-49cc-8d90-c8314ceb9951",
+      "comment": "",
+      "command": "type",
+      "target": "id=studentUsername",
+      "targets": [
+        ["id=studentUsername", "id"],
+        ["css=#studentUsername", "css:finder"],
+        ["xpath=//input[@id='studentUsername']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "ouweshs28"
+    }, {
+      "id": "b26a29c9-dae1-4d73-b946-7475efc7e47a",
+      "comment": "",
+      "command": "type",
+      "target": "id=studentPassword",
+      "targets": [
+        ["id=studentPassword", "id"],
+        ["css=#studentPassword", "css:finder"],
+        ["xpath=//input[@id='studentPassword']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "os2801"
+    }, {
+      "id": "99ee6e13-00f3-44f6-b160-179c2b37626e",
+      "comment": "",
+      "command": "click",
+      "target": "css=#studentSignIn .btn",
+      "targets": [
+        ["css=#studentSignIn .btn", "css:finder"],
+        ["xpath=//button[@onclick='loginStudent()']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign in')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6884d366-289f-455f-8011-037035f88de2",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=#studentSignIn .btn",
+      "targets": [
+        ["css=#studentSignIn .btn", "css:finder"],
+        ["xpath=//button[@onclick='loginStudent()']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign in')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "aefba136-a286-4d37-8e34-0ae3f0f6248a",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=#studentSignIn .btn",
+      "targets": [
+        ["css=#studentSignIn .btn", "css:finder"],
+        ["xpath=//button[@onclick='loginStudent()']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign in')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9a5ce196-04c9-41c7-8acb-2a4d1de491a9",
+      "comment": "if login is successful it should  redirect to the home page",
+      "command": "assertText",
+      "target": "css=.card-body:nth-child(2) > .card-title",
+      "targets": [
+        ["css=.card-body:nth-child(2) > .card-title", "css:finder"],
+        ["xpath=//div[@id='home']/div/div/h5", "xpath:idRelative"],
+        ["xpath=//h5", "xpath:position"],
+        ["xpath=//h5[contains(.,'Welcome to WebTutor')]", "xpath:innerText"]
+      ],
+      "value": "Welcome to WebTutor"
+    }, {
+      "id": "70c5d06e-c007-4260-9c2c-599b2c0e6048",
+      "comment": "Checks a user icon has been created on the navigation bar",
+      "command": "assertElementPresent",
+      "target": "id=navbarDropdown",
+      "targets": [
+        ["id=navbarDropdown", "id"],
+        ["css=#navbarDropdown", "css:finder"],
+        ["xpath=//a[@id='navbarDropdown']", "xpath:attributes"],
+        ["xpath=//div[@id='userSignedIn']/a", "xpath:idRelative"],
+        ["xpath=//nav/div/a", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "73f34e2a-f1dd-4f9d-be2a-e0c512d73b3b",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["4f125eb1-df63-4bbc-be8d-49dfc6c65363"]
+  }],
+  "urls": ["http://localhost:9000/"],
+  "plugins": []
+}

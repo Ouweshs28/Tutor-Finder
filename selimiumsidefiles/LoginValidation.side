@@ -1,0 +1,155 @@
+{
+  "id": "3c5cb77c-f722-40e7-9401-006371eaf567",
+  "version": "2.0",
+  "name": "LoginValidation",
+  "url": "http://localhost:9000",
+  "tests": [{
+    "id": "b6a8dcd0-fdd1-422d-96af-05c0d81f0bce",
+    "name": "LoginValidation",
+    "commands": [{
+      "id": "04fb109d-fdf9-4633-8d36-c3690aa2c8b4",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "86575a0f-71c7-4f8b-a35c-7b36d7a097a0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x880",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "53698422-24ea-4a47-8350-9ee052cb3813",
+      "comment": "",
+      "command": "click",
+      "target": "id=loginButton",
+      "targets": [
+        ["id=loginButton", "id"],
+        ["linkText=Login", "linkText"],
+        ["css=#loginButton", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[@id='loginButton']", "xpath:attributes"],
+        ["xpath=//div[@id='home']/div[2]/div/a", "xpath:idRelative"],
+        ["xpath=//div[2]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f79195b8-d616-452a-80f4-75f4727f9010",
+      "comment": "",
+      "command": "click",
+      "target": "id=studentUsername",
+      "targets": [
+        ["id=studentUsername", "id"],
+        ["css=#studentUsername", "css:finder"],
+        ["xpath=//input[@id='studentUsername']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cf3b6554-ad1e-4cf7-9976-d66e32b0022c",
+      "comment": "",
+      "command": "type",
+      "target": "id=studentUsername",
+      "targets": [
+        ["id=studentUsername", "id"],
+        ["css=#studentUsername", "css:finder"],
+        ["xpath=//input[@id='studentUsername']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "ouweshs28"
+    }, {
+      "id": "8e77dc1f-6b4c-4301-8c0e-1d2212e89657",
+      "comment": "",
+      "command": "click",
+      "target": "id=studentPassword",
+      "targets": [
+        ["id=studentPassword", "id"],
+        ["css=#studentPassword", "css:finder"],
+        ["xpath=//input[@id='studentPassword']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cfd04093-abe3-4871-a8e3-3c68920afeea",
+      "comment": "",
+      "command": "type",
+      "target": "id=studentPassword",
+      "targets": [
+        ["id=studentPassword", "id"],
+        ["css=#studentPassword", "css:finder"],
+        ["xpath=//input[@id='studentPassword']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "222"
+    }, {
+      "id": "f71bbfeb-276d-4774-9593-0cb201b2d4e5",
+      "comment": "",
+      "command": "click",
+      "target": "css=#studentSignIn .btn",
+      "targets": [
+        ["css=#studentSignIn .btn", "css:finder"],
+        ["xpath=//button[@onclick='loginStudent()']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign in')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5d08bf9a-ee42-4108-8eec-94a60b2fa8e3",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=#studentSignIn .btn",
+      "targets": [
+        ["css=#studentSignIn .btn", "css:finder"],
+        ["xpath=//button[@onclick='loginStudent()']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign in')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fc725cf5-67a6-425d-9455-364672015b89",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=#studentSignIn .btn",
+      "targets": [
+        ["css=#studentSignIn .btn", "css:finder"],
+        ["xpath=//button[@onclick='loginStudent()']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign in')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c44b73ec-7d87-4e7f-9435-719ec1e7ef1a",
+      "comment": "If incorrect details are inserted  or not details are entered the page will remain on the sign in",
+      "command": "assertText",
+      "target": "css=#studentSignIn .btn",
+      "targets": [
+        ["css=#studentSignIn .btn", "css:finder"],
+        ["xpath=//button[@onclick='loginStudent()']", "xpath:attributes"],
+        ["xpath=//div[@id='studentSignIn']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign in')]", "xpath:innerText"]
+      ],
+      "value": "Sign in"
+    }]
+  }],
+  "suites": [{
+    "id": "2d9f2783-5d4c-4923-b6b0-12d769b5cbfb",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["b6a8dcd0-fdd1-422d-96af-05c0d81f0bce"]
+  }],
+  "urls": ["http://localhost:9000/"],
+  "plugins": []
+}

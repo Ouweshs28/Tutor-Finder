@@ -1,0 +1,101 @@
+{
+  "id": "1564c6bd-f49c-4fe5-8f37-44c174d5fca8",
+  "version": "2.0",
+  "name": "BackButton",
+  "url": "http://localhost:9000",
+  "tests": [{
+    "id": "bf7fa56a-0379-4d05-9c3e-17f2487bb9f0",
+    "name": "BackButton",
+    "commands": [{
+      "id": "ddaf77dd-fb8c-4ed1-887a-5c28ea590a17",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "97d9e6c1-d49f-4dec-b79e-d8c64dc1d56f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1552x880",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "34f43919-c22c-487c-ba48-8baaa139330a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.navbar-toggler-icon",
+      "targets": [
+        ["css=.navbar-toggler-icon", "css:finder"],
+        ["xpath=//button[@id='userdrop']/span", "xpath:idRelative"],
+        ["xpath=//span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "df607586-a9c6-4307-8d5c-6394e5eb1029",
+      "comment": "",
+      "command": "click",
+      "target": "id=grade79",
+      "targets": [
+        ["id=grade79", "id"],
+        ["linkText=Grade 7-9", "linkText"],
+        ["css=#grade79", "css:finder"],
+        ["xpath=//a[contains(text(),'Grade 7-9')]", "xpath:link"],
+        ["xpath=//a[@id='grade79']", "xpath:attributes"],
+        ["xpath=//div[@id='v-pills-tab']/a", "xpath:idRelative"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Grade 7-9')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "91758733-e7b0-4e49-94ea-bd39a2c1bb84",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Reviews",
+      "targets": [
+        ["linkText=Reviews", "linkText"],
+        ["css=.card-body:nth-child(1) .btn:nth-child(2)", "css:finder"],
+        ["xpath=(//a[contains(text(),'Reviews')])[2]", "xpath:link"],
+        ["xpath=//a[@onclick=\"loadTutorReview('2')\"]", "xpath:attributes"],
+        ["xpath=//div[@id='tutors']/div/div/div/a[2]", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div/a[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0d550035-2316-43ee-ac4e-ac0e42aafa6c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-group:nth-child(2) > .btn-danger",
+      "targets": [
+        ["css=.form-group:nth-child(2) > .btn-danger", "css:finder"],
+        ["xpath=//button[@onclick='loadHome()']", "xpath:attributes"],
+        ["xpath=//div[@id='tutorReview']/div[2]/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Back')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ed63e925-5f5a-444f-88bf-9598cce8fabe",
+      "comment": "Checks if the button works correctly and goes back",
+      "command": "assertText",
+      "target": "css=.mx-auto .card-title",
+      "targets": [
+        ["css=.mx-auto .card-title", "css:finder"],
+        ["xpath=//div[@id='home']/div/div/h5", "xpath:idRelative"],
+        ["xpath=//h5", "xpath:position"],
+        ["xpath=//h5[contains(.,'Welcome to WebTutor')]", "xpath:innerText"]
+      ],
+      "value": "Welcome to WebTutor"
+    }]
+  }],
+  "suites": [{
+    "id": "210ccda9-41ee-47bf-aeb3-18afded04f25",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["bf7fa56a-0379-4d05-9c3e-17f2487bb9f0"]
+  }],
+  "urls": ["http://localhost:9000/"],
+  "plugins": []
+}
