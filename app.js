@@ -327,9 +327,11 @@ function AddReviewPost(request, response) {
         if (err) {//Check for errors
             console.error("Error executing query: " + JSON.stringify(err));
             response.send("error");
+            response.send("error");
 
         } else {
             console.log("success");
+            response.send("success");
         }
     });
     //Finish off the interaction.
